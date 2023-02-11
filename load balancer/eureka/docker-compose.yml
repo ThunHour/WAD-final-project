@@ -1,0 +1,9 @@
+version: '2'
+services:
+  myapp:
+    image: spring-boot-docker:spring-docker
+    restart: unless-stopped
+    ports:
+      - '8761:8761'
+    expose:
+      - 8761

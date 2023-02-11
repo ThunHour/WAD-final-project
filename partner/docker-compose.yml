@@ -1,0 +1,36 @@
+version: '3.3'
+
+services:
+  db:
+    image: postgres:14.3-alpine
+    container_name: partner-db
+    restart: unless-stopped
+    ports:
+      - 5455:5455
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_USER: kimhour
+      POSTGRES_DB: partner
+    networks:
+      - partner-network
+    expose:
+      - 5455
+    command: -p 5455
+
+  p-service:
+    image: partner-service
+    build: .
+    restart: always
+    ports:
+      - 4040:4001
+    command: python app.py
+    expose:
+      - 4040 
+    networks:
+      - partner-network
+    depends_on:
+      - db
+
+networks:
+  partner-network:
+    driver: bridge
