@@ -1,7 +1,9 @@
-version: '3.3'
+version: '3.8'
 services:
   myapp:
-    image: zuul:api-getway
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: unless-stopped
     ports:
       - '8080:8080'

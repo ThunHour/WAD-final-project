@@ -1,5 +1,7 @@
-version: '3.3'
-
+version: '3.8'
+networks:
+  partner-network:
+    driver: bridge
 services:
   db:
     image: postgres:14.3-alpine
@@ -16,10 +18,9 @@ services:
     expose:
       - 5455
     command: -p 5455
-
   p-service:
     image: partner-service
-    build: .
+    build: Dockerfile
     restart: always
     ports:
       - 4040:4001
@@ -31,6 +32,3 @@ services:
     depends_on:
       - db
 
-networks:
-  partner-network:
-    driver: bridge
