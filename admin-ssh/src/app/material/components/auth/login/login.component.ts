@@ -41,7 +41,7 @@ export class LoginComponent {
 
         this.auth.login(this.email, this.password).subscribe(async (res: any) => {
 
-            if (res.message === "Login user successfully" && res.data.role === "USER") {
+            if (res.message === "Login user successfully" && res.data.role === "ADMIN") {
                 await this.service.add({ severity: 'success', summary: 'Service Message', detail: 'Via MessageService' });
                 this.local.saveData("token", res.accessToken)
                 this.local.saveData("username", res.data.name)

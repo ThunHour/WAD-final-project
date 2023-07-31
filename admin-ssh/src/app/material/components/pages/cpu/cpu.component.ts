@@ -80,6 +80,7 @@ export class CpuComponent implements OnInit {
         this.cpu.spec = panelCpu.cpu ? panelCpu.cpu[0].spec : ""
         this.cpu.price = panelCpu.cpu ? panelCpu.cpu[0].price : 0
         this.itemSelected = this.categorys.filter((item) => item.id == panelCpu.category?.id)[0]
+            this.cpu.type = panelCpu.cpu ? panelCpu.cpu[0].type : ""
         this.selectedMotherBoard = this.motherBoardList.filter((item) => {
             const id = item.id
             return panelCpu.panelmotherBoard?.find((i) => {

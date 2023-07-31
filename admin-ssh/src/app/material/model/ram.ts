@@ -1,25 +1,25 @@
-interface Image{
+interface Image {
     id?: string;
-    imageUrl?:string
+    imageUrl?: string
 }
-interface color{
-    id?:string;
-    color?:string,
-    image?:Image[]
+interface color {
+    id?: string;
+    color?: string,
+    image?: Image[]
 
 }
-export interface PanelRam{
-    id?:string;
-    category?:Category;
-    name?:string,
-    ram?:Ram[],
-    image?:Image[],
-    panelmotherBoard?:PanelMotherBoard[]
+export interface PanelRam {
+    id?: string;
+    category?: Category;
+    name?: string,
+    ram?: Ram[],
+    image?: Image[],
+    panelmotherBoard?: PanelMotherBoard[]
 
 }
-export interface PanelMotherBoard{
-    id?:string;
-    name?:string;
+export interface PanelMotherBoard {
+    id?: string;
+    name?: string;
 }
 
 interface Category {
@@ -27,21 +27,23 @@ interface Category {
     categoryName?: string;
 }
 export interface CreateRam {
-    id?:string
+    id?: string
     categoryId?: string;
     itemId?: string;
     model?: string;
     spec?: string;
     color?: string;
     price?: number;
+    type?: string;
 }
 
 export interface Ram {
-    id:string;
+    id: string;
     categoryId?: string;
     model?: string;
     spec?: string;
     color?: color;
     price?: number;
-    listMotherBoardId?:string;
+    type?: string;
+    listMotherBoardId?: string;
 }

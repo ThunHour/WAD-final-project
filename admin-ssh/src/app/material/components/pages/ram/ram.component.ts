@@ -34,17 +34,12 @@ export class RamComponent implements OnInit {
     submitted: boolean = false;
     uploadedFiles: any[] = [];
     motherBoardList: PanelMotherBoard[] = [];
-
-
-
-
     rowsPerPageOptions = [5, 10, 20];
 
     constructor(private motherboard_service: MotherBoardService
         , private ram_service: RamService, private category_service: CategoryService, private messageService: MessageService) {
 
     }
-
     ngOnInit() {
         this.category_service.getAllCategory().subscribe((data: any) => {
             this.categorys = data.data;
@@ -79,6 +74,7 @@ export class RamComponent implements OnInit {
         this.ram.model = panelRam.ram ? panelRam.ram[0].model : ""
         this.ram.spec = panelRam.ram ? panelRam.ram[0].spec : ""
         this.ram.price = panelRam.ram ? panelRam.ram[0].price : 0
+        this.ram.type=panelRam.ram ? panelRam.ram[0].type : ""
         this.itemSelected = this.categorys.filter((item) => item.id == panelRam.category?.id)[0]
         this.selectedMotherBoard = this.motherBoardList.filter((item) => {
             const id = item.id
@@ -136,6 +132,7 @@ export class RamComponent implements OnInit {
                 formdata.set('price', this.ram.price?.toString() || "");
                 formdata.set('color', this.ram.color || "");
                 formdata.set('spec', this.ram.spec || "");
+                formdata.set('type', this.ram.type || "");
 
                 if (this.selectedMotherBoard.length > 0) {
                     var form = ""
@@ -180,9 +177,10 @@ export class RamComponent implements OnInit {
                 formdata.set('color', this.ram.color || "");
                 formdata.set('spec', this.ram.spec || "");
                 formdata.set('listMotherBoardId', form || "");
+                formdata.set('type', this.ram.type || "");
 
 
-                await this.ram_service.createRam(formdata).subscribe((data: any) => {
+                 this.ram_service.createRam(formdata).subscribe((data: any) => {
                     this.panelRams.push(data.data)
                     this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'ram Created', life: 3000 });
                 }, error => {

@@ -5,15 +5,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, jsonify
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
-import py_eureka_client.eureka_client as eureka_client
-import asyncio
+from waitress import serve
+# import py_eureka_client.eureka_client as eureka_client
 from functools import wraps
 import jwt
 app = Flask(__name__)
 
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://kimhour:123@localhost:5455/partner'
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://partner:123@partner-db:5433/partner-db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://s2k:123@localhost:5435/postgres'
 db = SQLAlchemy(app)
 JWTManager(app)
 
@@ -22,11 +22,11 @@ JWTManager(app)
 cloudinary.config(cloud_name='dxvv1kmvf', api_key='783156723597893',
                   api_secret='rwfOmk1wbQ1dwb3TNANhAlEUMfs')
 
-eureka_client.init(
-                    eureka_server="http://localhost:8761",
-                   app_name="partner-service",
-                   instance_host='localhost',
-                   instance_port=4001)
+# eureka_client.init(
+#                     eureka_server="http://localhost:8761",
+#                    app_name="partner-service",
+#                    instance_host='localhost',
+#                    instance_port=4001)
 
 
 class Partner(db.Model):
@@ -173,4 +173,4 @@ def delete(id):
 
 
 if __name__ == "__main__":
-    app.run(port=4001, debug=True, host="0.0.0.0")
+    serve(app, host="0.0.0.0", port=4001)

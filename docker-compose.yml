@@ -1,0 +1,99 @@
+version: "3.9"
+name: wadfinal
+services:
+  # admin-web:
+  #   build:
+  #     context: ./admin-ssh
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - '9000:80'
+  # user-web:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 8000:80
+  # eureka:
+  #   build:
+  #     context: ./load balancer/eureka
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - '8761:8761'
+  #   stdin_open: true
+  #   tty: true
+  api-get-way:
+    build:
+      context: ./load balancer/spring-boot-zuulgatwayproxy
+      dockerfile: Dockerfile
+    ports:
+      - 8080:1111
+    environment:
+      PORT: 1111
+      # MAIN: $main-service
+      # PARTNER: $partner-service
+    depends_on:
+      - main-service
+      - partner-service
+    networks:
+      - wad-network
+  main-db:
+    image: postgres:14.3-alpine
+    networks:
+      - wad-network
+    container_name: main-db
+    restart: unless-stopped
+    volumes:
+      - ./backend/backup/backup.sql:/docker-entrypoint-initdb.d/backup.sql # Mount the 'data' folder to /docker-entrypoint-initdb.d inside the container
+      - ./backend/script/restore.sh:/docker-entrypoint-initdb.d/restore.sh 
+    environment:
+      POSTGRES_USER: main
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: main-db
+    command: -p 5434
+    ports:
+      - "5434:5434"
+  main-service:
+    networks:
+      - wad-network
+    stdin_open: true
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: main-service
+    depends_on:
+      - main-db
+    ports:
+      - "3030:3030"
+  partner-db:
+    image: postgres:14.3-alpine
+    container_name: partner-db
+    restart: always
+    command: -p 5433
+    ports:
+      - "5433:5433" # Correct the port mapping, it should be "5432" for PostgreSQL
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_USER: partner
+      POSTGRES_DB: partner-db
+    volumes:
+      - ./partner/backup/backup.sql:/docker-entrypoint-initdb.d/backup.sql # Mount the 'data' folder to /docker-entrypoint-initdb.d inside the container
+      - ./partner/script/restore.sh:/docker-entrypoint-initdb.d/restore.sh  # Mount the restore script to the initdb.d folder
+    networks:
+      - wad-network
+  partner-service:
+    build:
+      context: ./partner
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "4040:4001" # Use quotes for the port mapping
+    command: python app.py
+    networks:
+      - wad-network
+    depends_on:
+      - partner-db
+
+networks:
+  wad-network:
+    driver: bridge

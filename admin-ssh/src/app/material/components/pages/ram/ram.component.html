@@ -88,14 +88,21 @@
             <ng-template pTemplate="content">
                 <div class="d-flex flex-row " style="display: flex; flex-direction: row;">
 
-                    <div class="field mx-5" style="display: block;width:100%;">
+                    <div class="field mt-5 mb-5 mx-5" style="width:45%;">
 
                         <span class="p-float-label">
-                            <p-multiSelect inputId="multiselect" [options]="motherBoardList" [(ngModel)]="selectedMotherBoard"
-                                optionLabel="name" [filter]="false"></p-multiSelect>
+                            <p-multiSelect inputId="multiselect" [options]="motherBoardList"
+                                [(ngModel)]="selectedMotherBoard" optionLabel="name" [filter]="false"></p-multiSelect>
                             <label for="multiselect">MultiSelect</label>
                         </span>
 
+                    </div>
+                    <div class="field " style="width: 45%; margin-top: 2px;">
+                        <label for="type">Type</label>
+                        <input type="text" pInputText id="name" [(ngModel)]="ram.type" required autofocus
+                            [ngClass]="{'ng-invalid ng-dirty' : submitted && !ram.type}" />
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && !ram.type">Model is
+                            required.</small>
                     </div>
                 </div>
                 <div class="d-flex flex-row" style="display: flex; flex-direction: row;">

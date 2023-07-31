@@ -16,9 +16,10 @@ export class RamService {
     createRam(data: any) {
         let httpOptions = {
             headers: this.httpHeader.authHeaderWithFile('token'),
-            param: null,
 
         }
+        console.log(data);
+
         return this.http.post(this.base.url + "ram/create", data, httpOptions)
     }
     deleteRam(id: any) {
