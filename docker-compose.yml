@@ -45,7 +45,7 @@ services:
       SPRING_APPLICATION_JSON: '{
         "zuul.routes.partner.url" : "http://partner-service:4040",
         "zuul.routes.main.url" : "http://main-service:3030",
-        "server.port" : 8080,
+        "server.port" : 8888,
         "spring.application.name" : "zuul-server",
         "eureka.instance.preferIpAddress" : true,
         "eureka.client.registerWithEureka" : true,
