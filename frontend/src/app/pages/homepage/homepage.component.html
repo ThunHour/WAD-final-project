@@ -1,0 +1,119 @@
+<section id="hero" class="d-flex align-items-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up"
+        data-aos-delay="200">
+        <h1>Customize Your Dream PC With Us</h1>
+        <div class="d-flex justify-content-center justify-content-lg-start">
+          <button id="customize-btn" [routerLink]="'/customize'" type="button" class="btn btn-light">Start your
+            Design</button>
+        </div>
+
+      </div>
+      <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+        <img src="../../../assets/images/heroImg.png" class="img-fluid animated" alt="">
+      </div>
+    </div>
+  </div>
+  <!-- <h1>Customize Your Dream PC With Us</h1>
+  <div class="">
+    <button id="customize-btn" [routerLink]="'/customize'" type="button" class="btn btn-light">Start your
+      Design</button>
+  </div> -->
+</section>
+
+<section id="main">
+  <div class="title mt-5">
+    <h1 class="ps-5"> How does it Work?</h1>
+  </div>
+  <div class="container">
+    <div class="row d-flex justify-content-center mt-5">
+      <div class="col-lg-2  d-flex justify-content-center step">
+        <div>
+          <div class="d-flex justify-content-center">
+            <h6>Step 1</h6>
+          </div>
+          <div class="icon-container mb-2 mt-3">
+            <img src="../../../assets/icons/desktop.svg" alt="?">
+          </div>
+          <div class="text-center">
+            <p class="mt-4">Think your dream PC</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-1 mt-5">
+        <img src="../../../assets/icons/arrow.svg" alt="?" class="mt-3 ms-3">
+      </div>
+      <div class="col-lg-2  d-flex justify-content-center step">
+        <div>
+          <div class="d-flex justify-content-center">
+            <h6>Step 1</h6>
+          </div>
+          <div class="icon-container mb-2 mt-3">
+            <img src="../../../assets/icons/setting.svg" alt="?">
+          </div>
+          <div class="text-center">
+            <p class="mt-4">Start your design</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-1 mt-5">
+        <img src="../../../assets/icons/arrow.svg" alt="?" class="mt-3 ms-3">
+      </div>
+      <div class="col-lg-2  d-flex justify-content-center step">
+        <div>
+          <div class="d-flex justify-content-center">
+            <h6>Step 1</h6>
+          </div>
+          <div class="icon-container mb-2 mt-3">
+            <img src="../../../assets/icons/tick.svg" alt="?">
+          </div>
+          <div class="text-center">
+            <p class="mt-4">Save your time</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-1 mt-5">
+        <img src="../../../assets/icons/arrow.svg" alt="?" class="mt-3 ms-3">
+      </div>
+      <div class="col-lg-2  d-flex justify-content-center step">
+        <div>
+          <div class="d-flex justify-content-center">
+            <h6>Step 1</h6>
+          </div>
+          <div class="icon-container mb-2 mt-3">
+            <img src="../../../assets/icons/wrench.svg" alt="?">
+          </div>
+          <div class="text-center">
+            <p class="mt-4">Done your design</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="title mt-5">
+    <h1 class="ps-5">PC Models</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mt-5 d-flex justify-content-center" *ngFor="let i of items">
+          <div class="card" style="width: 18rem; padding: 20px">
+            <img class="card-img-top" src={{i.case.color.image[0].imageUrl}} alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title text-center">Custom By {{i.user.name}}</h5>
+              <p class="card-text">Are your looking for a new PC build ?</p>
+              <div class="d-flex justify-content-center btnn" (click)="viewDetail(i.id)"><a
+                  class="btn btn-outline-warning ">View
+                  Detail</a></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mt-5">
+  <app-footer></app-footer>
+</div>

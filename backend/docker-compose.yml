@@ -1,0 +1,35 @@
+version: "3.8"
+name: "wadfinalizer"
+services:
+  main-db:
+    image: postgres:14.3-alpine
+    networks:
+      - app-network
+    container_name: postwadfinal
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: main
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: main-db
+    volumes:
+      - ./backup/backup.sql:/docker-entrypoint-initdb.d/backup.sql 
+      - ./script/restore.sh:/docker-entrypoint-initdb.d/restore.sh 
+    ports:
+      - "5545:5432"
+  main-service:
+    networks:
+      - app-network
+    stdin_open: true
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: prisma-api
+    depends_on:
+      - main-db
+    ports:
+      - "3030:3030"
+    command: pnpm start
+networks:
+  app-network:
+    driver: bridge

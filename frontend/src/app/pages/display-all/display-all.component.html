@@ -1,0 +1,93 @@
+<div *ngIf="isLoading==true; else main">
+  <app-loading></app-loading>
+</div>
+<ng-template #main>
+  <div class="container">
+    <h2 class="mt-3 fw-bold">MotherBoard</h2>
+    <owl-carousel-o [options]="customOptions">
+      <ng-template carouselSlide *ngFor="let p of listMotherBoard">
+        <div class="card" (click)="goDetail(p.id,'motherBoard')">
+
+          <img [src]="p.motherBoard[0].color.image[0].imageUrl" class="card-img-top " style="object-fit: contain; "
+            alt="...">
+          <div class="card-body">
+            <h6 class="card-title">MotherBoard Name : {{p.motherBoard[0].model}}</h6>
+            <h6 style="color:#FF4C29">{{p.motherBoard[0].price}} $</h6>
+          </div>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
+    <h2 class="mt-3 fw-bold">Case</h2>
+    <owl-carousel-o [options]="customOptions">
+      <ng-template carouselSlide *ngFor="let p of listCase">
+        <div class="card" (click)="goDetail(p.id,'case')">
+          <img [src]="p.case[0].color.image[0].imageUrl" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">MotherBoard Name : {{p.case[0].model}}</h6>
+            <h6 style="color:#FF4C29">{{p.case[0].price}} $</h6>
+          </div>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
+    <h2 class="mt-3 fw-bold">GPU</h2>
+    <owl-carousel-o [options]="customOptions">
+      <ng-template carouselSlide *ngFor="let p of listGpu">
+        <div class="card" (click)="goDetail(p.id,'gpu')">
+          <img [src]="p.gpu[0].color.image[0].imageUrl" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">MotherBoard Name : {{p.gpu[0].model}}</h6>
+            <h6 style="color:#FF4C29">{{p.gpu[0].price}} $</h6>
+          </div>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
+    <h2 class="mt-3 fw-bold">Power Supply</h2>
+    <owl-carousel-o [options]="customOptions">
+      <ng-template carouselSlide *ngFor="let p of listPowerSupply">
+        <div class="card" (click)="goDetail(p.id,'powerSupply')">
+          <img [src]="p.powerSupply[0].color.image[0].imageUrl" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">MotherBoard Name : {{p.powerSupply[0].model}}</h6>
+            <h6 style="color:#FF4C29">{{p.powerSupply[0].price}} $</h6>
+          </div>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
+    <h2 class="mt-3 fw-bold">Storage</h2>
+    <owl-carousel-o [options]="customOptions">
+      <ng-template carouselSlide *ngFor="let p of listStorage">
+        <div class="card" (click)="goDetail(p.id,'storage')">
+          <img [src]="p.storage[0].color.image[0].imageUrl" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">MotherBoard Name : {{p.storage[0].model}}</h6>
+            <h6 style="color:#FF4C29">{{p.storage[0].price}} $</h6>
+          </div>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
+    <h2 class="mt-3 fw-bold">RAM</h2>
+    <owl-carousel-o [options]="customOptions">
+      <ng-template carouselSlide *ngFor="let p of listRam">
+        <div class="card" (click)="goDetail(p.id,'ram')">
+          <img [src]="p.ram[0].color.image[0].imageUrl" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">MotherBoard Name : {{p.ram[0].model}}</h6>
+            <h6 style="color:#FF4C29">{{p.ram[0].price}} $</h6>
+          </div>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
+    <h2 class="mt-3 fw-bold">CPU</h2>
+    <owl-carousel-o [options]="customOptions">
+      <ng-template carouselSlide *ngFor="let p of listCpu">
+        <div class="card" (click)="goDetail(p.id,'cpu')">
+          <img [src]="p.cpu[0].color.image[0].imageUrl" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h6 class="card-title">MotherBoard Name : {{p.cpu[0].model}}</h6>
+            <h6 style="color:#FF4C29">{{p.cpu[0].price}} $</h6>
+          </div>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
+  </div>
+</ng-template>

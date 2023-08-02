@@ -1,0 +1,30 @@
+<div class="sub-title mt-3">
+  <h1 class="ps-5">Partner</h1>
+</div>
+<div class="mx-5 mb-5">
+  <owl-carousel-o [options]="customOptions">
+    <ng-template carouselSlide *ngFor="let p of listPartner">
+      <div class="card ms-5" style="display: flex; justify-content: center; align-items: center;">
+        <div style="height: 200px;width: 200px; display: flex">
+          <img class="card-img-top" [src]="p.imgeUrl" style="object-fit: contain" alt="Card image cap">
+        </div>
+
+        <div class="card-body">
+          <h6 class="card-title" style="align-self: center;text-align: center;">{{p.storeName}}</h6>
+          <div class="row mt-4">
+            <div class="col-6">
+              <div style=" width: max-content;"><a href="{{p.location}}" target="_blank" class="btn btn-outline-warning " style="font-size: 12px; ">Get Location</a></div>
+            </div>
+            <div class="col-6">
+              <div style=" width: max-content;"><a  href="{{p.webUrl}}" target="_blank" class="btn btn-outline-warning " style="font-size: 12px;">Get Website</a></div>
+            </div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </ng-template>
+  </owl-carousel-o>
+</div>

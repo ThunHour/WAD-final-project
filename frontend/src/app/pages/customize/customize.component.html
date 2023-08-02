@@ -1,0 +1,692 @@
+<div class="container mt-3">
+  <div id="stepper1" class="bs-stepper">
+    <div class="bs-stepper-header">
+      <div class="step" data-target="#test-l-1">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">1</span>
+          <span class="bs-stepper-label">MotherBoard</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-2">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">2</span>
+          <span class="bs-stepper-label">Case</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-3">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">3</span>
+          <span class="bs-stepper-label">GPU</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-4">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">4</span>
+          <span class="bs-stepper-label">PowerSupply</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-5">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">5</span>
+          <span class="bs-stepper-label">Storage</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-6">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">6</span>
+          <span class="bs-stepper-label">RAM</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-7">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">7</span>
+          <span class="bs-stepper-label">CPU</span>
+        </button>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="bs-stepper-content w-100 p-5 ">
+
+        <form>
+          <!-- MotherBoard -->
+          <div id="test-l-1" class="content pt-2">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="icon-container mb-2" *ngFor="let m of selectedMotherBoard.color.image">
+                        <img src={{m.imageUrl}} class="img-fluid animated" alt="">
+                      </div>
+
+                    </div>
+                    <div class="col-lg-8" style="
+                    margin-right: 20px;
+                    height:  320px;
+                    margin-bottom: 1px;">
+                      <img src={{selectedMotherBoard.color.image[0].imageUrl}} class="img-fluid animated" alt=""
+                        style="object-fit: contain;" width="350" height="350">
+                      <div class="row mt-3 info">
+                        <div class="col-lg-6">
+                          <h1>Model</h1>
+                          <span class="detail">{{selectedMotherBoard.model}}</span>
+                          <h1 class="mt-3">Color</h1>
+                          <span class="detail">{{selectedMotherBoard.color.color}}</span>
+                        </div>
+                        <div class="col-lg-6">
+                          <h1 class="">Price</h1>
+                          <span class="detail">${{selectedMotherBoard.price}}</span>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div id="dialog-window">
+                    <h1>MOTHERBOARD ({{listMotherBoard.length}})</h1>
+                    <div id="scrollable-content">
+                      <div *ngFor="let p of listMotherBoard" (click)="onSelectedMotherboard(p.id)">
+                        <div *ngIf="selectedItem(p.motherBoard[0].id, selectedMotherBoard.id) else pNotMatch">
+                          <div class="card mb-3 mt-3" style="max-width: 98%; border-style: solid;
+                          border-width: 2px;
+                          border-color: #FFA500;">
+                            <div class="row no-gutters">
+                              <div class="col-lg-4">
+                                <img [src]="p.motherBoard[0].color.image[0].imageUrl" class="card-img-top" alt="..."
+                                  style="object-fit:contain" />
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{p.motherBoard[0].model}}</h5>
+                                  <p class="card-text">Selected</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <ng-template #pNotMatch>
+                          <div class="card mb-3 mt-3" style="max-width: 98%;">
+                            <div class="row no-gutters">
+                              <div class="col-lg-4">
+                                <img [src]="p.motherBoard[0].color.image[0].imageUrl" class="card-img-top" alt="..."
+                                  style="object-fit:contain" />
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{p.motherBoard[0].model}}</h5>
+                                  <p class="card-text">Select</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </div>
+
+                    </div>
+                    <div id="footer">
+                      <button (click)="onNext()" class="btn button-content w-100">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case -->
+          <div id="test-l-2" class="content">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-3">
+
+                      <div class="icon-container mb-2" *ngFor="let c of selectedCase.color.image">
+                        <img src={{c.imageUrl}} class="img-fluid animated" alt="">
+                      </div>
+
+
+                    </div>
+                    <div class="col-lg-8">
+                      <img src={{selectedCase.color.image[0].imageUrl}} class="img-fluid animated" alt="" width="350"
+                        height="350">
+                      <div class="row mt-3 info">
+                        <div class="col-lg-6">
+                          <h1>Model</h1>
+                          <span class="detail">{{selectedCase.model}}</span>
+                          <h1 class="mt-3">Color</h1>
+                          <span class="detail">{{selectedCase.color.color}}</span>
+                        </div>
+                        <div class="col-lg-6">
+                          <h1 class="">Price</h1>
+                          <span class="detail">${{selectedCase.price}}</span>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div id="dialog-window">
+                    <h1>CASE ({{relatedCase.length}})</h1>
+                    <div id="scrollable-content">
+
+                      <div *ngFor="let c of relatedCase" (click)="onSelectedCase(c.case[0].id)">
+
+                        <div *ngIf="selectedItem(c.case[0].id, selectedCase.id) else pNotMatch">
+                          <div class="card mb-3 mt-3" style="max-width: 98%; border-style: solid;
+                          border-width: 2px;
+                          border-color: #FFA500;">
+                            <div class="row no-gutters">
+                              <div class="col-lg-4">
+                                <img [src]="c.case[0].color.image[0].imageUrl" class="card-img-top" alt="..."
+                                  style="object-fit:contain" />
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{c.case[0].model}}</h5>
+                                  <p class="card-text">Selected</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <ng-template #pNotMatch>
+                          <div class="card mb-3 mt-3" style="max-width: 98%;">
+                            <div class="row no-gutters">
+                              <div class="col-lg-4">
+                                <img [src]="c.case[0].color.image[0].imageUrl" class="card-img-top" alt="..."
+                                  style="object-fit:contain" />
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{c.case[0].model}}</h5>
+                                  <p class="card-text">Select</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </div>
+                    </div>
+
+
+                    <div id="footer">
+                      <button (click)="onNext()" class="btn button-content w-100">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GPU  -->
+          <div id="test-l-3" class="content">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="icon-container mb-2" *ngFor="let m of selectedGpu.color.image">
+                        <img src={{m.imageUrl}} class="img-fluid animated" alt="">
+                      </div>
+                    </div>
+                    <div class="col-lg-8">
+                      <img src={{selectedGpu.color.image[0].imageUrl}} class="img-fluid animated" alt="" width="350"
+                        height="350">
+                      <div class="row mt-3 info">
+                        <div class="col-lg-6">
+                          <h1>Model</h1>
+                          <span class="detail">{{selectedGpu.model}}</span>
+                          <h1 class="mt-3">Color</h1>
+                          <span class="detail">{{selectedGpu.color.color}}</span>
+                        </div>
+                        <div class="col-lg-6">
+                          <h1>Spec</h1>
+                          <span class="detail">{{selectedGpu.spec}}</span>
+                          <h1 class="mt-3">Price</h1>
+                          <span class="detail"> ${{selectedGpu.price}}</span>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div id="dialog-window">
+                    <h1>GPU ({{listGpu.length}})</h1>
+
+                    <div id="scrollable-content">
+                      <div style="max-width: 98%;" *ngFor="let p of listGpu" (click)="onSelectedGpu(p.gpu[0].id)">
+
+                        <div *ngIf="selectedItem(p.gpu[0].id, selectedGpu.id) else pNotMatch">
+                          <div class="card mb-3 mt-3" style="max-width: 98%; border-style: solid;
+                          border-width: 2px;
+                          border-color: #FFA500;">
+                            <div class="row no-gutters">
+                              <div class="col-lg-4">
+                                <img [src]="p.gpu[0].color.image[0].imageUrl" class="card-img-top" alt="..."
+                                  style="object-fit:contain" />
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{p.gpu[0].model}}</h5>
+                                  <p class="card-text">Selected</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <ng-template #pNotMatch>
+                          <div class="card mb-3 mt-3" style="max-width: 98%;">
+                            <div class="row no-gutters">
+                              <div class="col-lg-4">
+                                <img [src]="p.gpu[0].color.image[0].imageUrl" class="card-img-top" alt="..."
+                                  style="object-fit:contain" />
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{p.gpu[0].model}}</h5>
+                                  <p class="card-text">Select</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </div>
+
+                    </div>
+                    <div id="footer">
+                      <button (click)="onNext()" class="btn button-content w-100">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PowerSupply -->
+          <div id="test-l-4" class="content">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="icon-container mb-2" *ngFor="let m of selectedPowerSupply.color.image">
+                        <img src={{m.imageUrl}} class="img-fluid animated" alt="">
+                      </div>
+                    </div>
+                    <div class="col-lg-8">
+                      <img src={{selectedPowerSupply.color.image[0].imageUrl}} class="img-fluid animated" alt=""
+                        width="350" height="350">
+                      <div class="row mt-3 info">
+                        <div class="col-lg-6">
+                          <h1>Model</h1>
+                          <span class="detail">{{selectedPowerSupply.model}}</span>
+                          <h1 class="mt-3">Color</h1>
+                          <span class="detail">{{selectedPowerSupply.color.color}}</span>
+                        </div>
+                        <div class="col-lg-6">
+                          <h1>Spec</h1>
+                          <span class="detail"> {{selectedPowerSupply.spec}}</span>
+                          <h1 class="mt-3">Price</h1>
+                          <span class="detail"> ${{selectedPowerSupply.price}}</span>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div id="dialog-window">
+                    <h1>POWERSUPPLY ({{listPowerSupply.length}})</h1>
+
+                    <div id="scrollable-content">
+                      <div style="max-width: 98%;" *ngFor="let p of listPowerSupply"
+                        (click)="onSelectedPowerSupply(p.powerSupply[0].id)">
+
+                        <div *ngIf="selectedItem(p.powerSupply[0].id, selectedPowerSupply.id) else pNotMatch">
+                          <div class="card mb-3 mt-3" style="max-width: 98%; border-style: solid;
+                          border-width: 2px;
+                          border-color: #FFA500;">
+                            <div class="row no-gutters">
+                              <div class="col-lg-4">
+                                <img [src]="p.powerSupply[0].color.image[0].imageUrl" class="card-img-top" alt="..."
+                                  style="object-fit:contain" />
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{p.powerSupply[0].model}}</h5>
+                                  <p class="card-text">Selected</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <ng-template #pNotMatch>
+                          <div class="card mb-3 mt-3" style="max-width: 98%;">
+                            <div class="row no-gutters">
+                              <div class="col-lg-4">
+                                <img [src]="p.powerSupply[0].color.image[0].imageUrl" class="card-img-top" alt="..."
+                                  style="object-fit:contain" />
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{p.powerSupply[0].model}}</h5>
+                                  <p class="card-text">Select</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </div>
+                    </div>
+
+
+                    <div id="footer">
+                      <button (click)="onNext()" class="btn button-content w-100">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Storage -->
+          <div id="test-l-5" class="content">
+
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="icon-container mb-2" *ngFor="let m of selectedStorage.color.image">
+                        <img src={{m.imageUrl}} class="img-fluid animated" alt="">
+                      </div>
+                    </div>
+                    <div class="col-lg-8">
+                      <img src={{selectedStorage.color.image[0].imageUrl}} class="img-fluid animated" alt="" width="350"
+                        height="350">
+                      <div class="row mt-3 info">
+                        <div class="col-lg-6">
+                          <h1>Model</h1>
+                          <span class="detail"> {{selectedStorage.model}}</span>
+                          <h1 class="mt-3">Color</h1>
+                          <span class="detail"> {{selectedStorage.color.color}}</span>
+                        </div>
+                        <div class="col-lg-6">
+                          <h1>Spec</h1>
+                          <span class="detail"> {{selectedStorage.spec}}</span>
+                          <h1 class="mt-3">Price</h1>
+                          <span class="detail"> $ {{selectedStorage.price}}</span>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div id="dialog-window">
+                    <h1>Storage ({{relatedStorage.length}})</h1>
+
+                    <div id="scrollable-content">
+                      <div *ngFor="let c of relatedStorage" (click)="onSelectedStorage(c.storage[0].id)">
+
+                        <div *ngIf="selectedItem(c.storage[0].id, selectedStorage.id) else pNotMatch">
+                          <div class="card mb-3 mt-3" style="max-width: 98%; border-style: solid;
+                          border-width: 2px;
+                          border-color: #FFA500;">
+                            <div class="row no-gutters">
+                              <div class="col-lg-4">
+                                <img [src]="c.storage[0].color.image[0].imageUrl" class="card-img-top" alt="..."
+                                  style="object-fit:contain" />
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{c.storage[0].model}}</h5>
+                                  <p class="card-text">Selected</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <ng-template #pNotMatch>
+                          <div class="card mb-3 mt-3" style="max-width: 98%;">
+                            <div class="row no-gutters">
+                              <div class="col-lg-4">
+                                <img [src]="c.storage[0].color.image[0].imageUrl" class="card-img-top" alt="..."
+                                  style="object-fit:contain" />
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{c.storage[0].model}}</h5>
+                                  <p class="card-text">Select</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </div>
+
+                    </div>
+
+                    <div id="footer">
+                      <button (click)="onNext()" class="btn button-content w-100">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RAM -->
+          <div id="test-l-6" class="content">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-3">
+
+                      <div class="icon-container mb-2" *ngFor="let c of selectedRam.color.image">
+                        <img src={{c.imageUrl}} class="img-fluid animated" alt="">
+                      </div>
+                    </div>
+                    <div class="col-lg-8">
+                      <img src={{selectedRam.color.image[0].imageUrl}} class="img-fluid animated" alt="" width="350"
+                        height="350">
+                      <div class="row mt-3 info">
+                        <div class="col-lg-6">
+                          <h1>Model</h1>
+                          <span class="detail"> {{selectedRam.model}}</span>
+                          <h1 class="mt-3">Color</h1>
+                          <span class="detail"> {{selectedRam.color.color}}</span>
+                        </div>
+                        <div class="col-lg-6">
+                          <h1>Spec</h1>
+                          <span class="detail"> {{selectedRam.spec}}</span>
+                          <h1 class="mt-3">Price</h1>
+                          <span class="detail"> ${{selectedRam.price}}</span>
+                        </div>
+                        <div class="col-lg-6">
+                          <h1 class="mt-3">Type</h1>
+                          <span class="detail"> {{selectedRam.type}}</span>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div id="dialog-window">
+                    <h1>RAM ({{relatedRam.length}})</h1>
+
+                    <div id="scrollable-content">
+
+                      <div *ngFor="let c of relatedRam" (click)="onSelectedRam(c.ram[0].id)">
+
+                        <div *ngIf="selectedItem(c.ram[0].id, selectedRam.id) else pNotMatch">
+                          <div class="card mb-3 mt-3" style="max-width: 98%; border-style: solid;
+                          border-width: 2px;
+                          border-color: #FFA500;">
+                            <div class="row no-gutters">
+                              <div class="col-lg-4">
+                                <img [src]="c.ram[0].color.image[0].imageUrl" class="card-img-top" alt="..."
+                                  style="object-fit:contain" />
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{c.ram[0].model}}</h5>
+                                  <p class="card-text">Selected</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <ng-template #pNotMatch>
+                          <div class="card mb-3 mt-3" style="max-width: 98%;">
+                            <div class="row no-gutters">
+                              <div class="col-lg-4">
+                                <img [src]="c.ram[0].color.image[0].imageUrl" class="card-img-top" alt="..."
+                                  style="object-fit:contain" />
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{c.ram[0].model}}</h5>
+                                  <p class="card-text">Select</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </div>
+
+                    </div>
+
+                    <div id="footer">
+                      <button (click)="onNext()" class="btn button-content w-100">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CPU -->
+          <div id="test-l-7" class="content">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-3">
+
+                      <div class="icon-container mb-2" *ngFor="let c of selectedCpu.color.image">
+                        <img src={{c.imageUrl}} class="img-fluid animated" alt="">
+                      </div>
+                    </div>
+                    <div class="col-lg-8">
+                      <img src={{selectedCpu.color.image[0].imageUrl}} class="img-fluid animated" alt="" width="350"
+                        height="350">
+                      <div class="row mt-3 info">
+                        <div class="col-lg-6">
+                          <h1>Model</h1>
+                          <span class="detail"> {{selectedCpu.model}}</span>
+                          <h1 class="mt-3">Color</h1>
+                          <span class="detail"> {{selectedCpu.color.color}}</span>
+                        </div>
+                        <div class="col-lg-6">
+                          <h1>Spec</h1>
+                          <span class="detail"> {{selectedCpu.spec}}</span>
+                          <h1 class="mt-3">Price</h1>
+                          <span class="detail"> $ {{selectedCpu.price}}</span>
+                        </div>
+                        <div class="col-lg-6">
+                          <h1 class="mt-3">Type</h1>
+                          <span class="detail"> {{selectedCpu.type}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div id="dialog-window">
+                    <h1>CPU ({{relatedCpu.length}})</h1>
+
+                    <div id="scrollable-content">
+
+                      <div *ngFor="let c of relatedCpu" (click)="onSelectedCpu(c.cpu[0].id)">
+
+                        <div *ngIf="selectedItem(c.cpu[0].id, selectedCpu.id) else pNotMatch">
+                          <div class="card mb-3 mt-3" style="max-width: 98%; border-style: solid;
+                          border-width: 2px;
+                          border-color: #FFA500;">
+                            <div class="row no-gutters">
+                              <div class="col-lg-4">
+                                <img [src]="c.cpu[0].color.image[0].imageUrl" class="card-img-top" alt="..."
+                                  style="object-fit:contain" />
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{c.cpu[0].model}}</h5>
+                                  <p class="card-text">Selected</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <ng-template #pNotMatch>
+                          <div class="card mb-3 mt-3" style="max-width: 98%;">
+                            <div class="row no-gutters">
+                              <div class="col-lg-4">
+                                <img [src]="c.cpu[0].color.image[0].imageUrl" class="card-img-top" alt="..."
+                                  style="object-fit:contain" />
+                              </div>
+                              <div class="col-lg-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{c.cpu[0].model}}</h5>
+                                  <p class="card-text">Select</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </div>
+                    </div>
+
+                    <div id="footer">
+                      <p-dialog header="Sucess!" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+                        [draggable]="false" [resizable]="false">
+                        <p class="m-0">
+                          Congratulations, your desktop has been successfully customized!
+                        </p>
+                        <ng-template pTemplate="footer">
+                          <p-button icon="pi pi-check" (click)="displayModal=false; onBackHome()" label="Next"
+                            styleClass="p-button-text"></p-button>
+                        </ng-template>
+                      </p-dialog>
+                      <button type="button" (click)="showModalDialog(); submitPc()"
+                        class="btn button-content w-100">Submit</button>
+
+                    </div>
+
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

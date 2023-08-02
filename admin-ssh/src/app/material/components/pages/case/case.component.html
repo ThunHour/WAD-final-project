@@ -1,0 +1,187 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <p-toast></p-toast>
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
+                            (click)="openNew()"></button>
+                        <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger"
+                            (click)="deleteSelectedPanelCase()"
+                            [disabled]="!selectedPanelCase || !selectedPanelCase.length"></button>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import"
+                        chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
+                    <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"
+                        (click)="dt.exportCSV()"></button>
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt [value]="panelCases" responsiveLayout="scroll" [rows]="10"
+                [globalFilterFields]="['name','spec','color','status']" [rows]="10" [paginator]="true"
+                [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [(selection)]="selectedPanelCase" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Manage Gpu</h5>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."
+                                class="w-full sm:w-auto" />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="name">Model <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+                        <th pSortableColumn="color">Color <p-sortIcon field="color"></p-sortIcon></th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-case>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="case"></p-tableCheckbox>
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Name</span>
+                            {{case.name}}
+                        </td>
+
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Category</span>
+                            {{case.case[0].price}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Category</span>
+                            {{case.case[0].color.color}}
+                        </td>
+
+                        <td>
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success mr-2" (click)="editCase(case)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                    (click)="deleteCase(case)"></button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <p-dialog [(visible)]="caseDialog" [style]="{width: '50VW'}" header="Storage Details" [modal]="true"
+            class="p-fluid">
+            <ng-template pTemplate="content">
+                <div class="d-flex flex-row " style="display: flex; flex-direction: row;">
+
+                    <div class="field mx-5" style="display: block;width:100%;">
+
+                        <span class="p-float-label">
+                            <p-multiSelect inputId="multiselect" [options]="motherBoardList"
+                                [(ngModel)]="selectedMotherBoard" optionLabel="name" [filter]="false"></p-multiSelect>
+                            <label for="multiselect">MultiSelect</label>
+                        </span>
+
+                    </div>
+                </div>
+                <div class="d-flex flex-row" style="display: flex; flex-direction: row;">
+                    <div class="field mt-5 mb-5 mx-5
+                    " style="width: 45%;">
+                        <span class="p-float-label" *ngIf="createCase==false">
+                            <p-dropdown [autoDisplayFirst]="itemSelected" inputId="category" [options]="categorys"
+                                [(ngModel)]="itemSelected" optionLabel="categoryName"></p-dropdown>
+                            <label for="Category">Category</label>
+                        </span>
+                        <span class="p-float-label" *ngIf="createCase==true">
+                            <p-dropdown inputId="Storage" [autoDisplayFirst]="false" [options]="categorys"
+                                [(ngModel)]="itemSelected" optionLabel="categoryName"></p-dropdown>
+                            <label for="Category">Category</label></span>
+                    </div>
+                    <div class="field " style="width: 45%; margin-top: 2px;">
+                        <label for="model">Model</label>
+                        <input type="text" pInputText id="name" [(ngModel)]="case.model" required autofocus
+                            [ngClass]="{'ng-invalid ng-dirty' : submitted && !case.model}" />
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && !case.model">Model is
+                            required.</small>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row " style="display: flex; flex-direction: row;">
+                    <div class="field mx-5" style="width: 45%; ">
+                        <label for="price">Price</label>
+                        <input type="number" pInputText id="name" [(ngModel)]="case.price" required autofocus
+                            [ngClass]="{'ng-invalid ng-dirty' : submitted && !case.price}" />
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && !case.price">Price is
+                            required.</small>
+                    </div>
+                    <div class="field
+                    " style="width: 45%;">
+
+
+                        <label for="color">Color</label>
+                        <input type="text" pInputText id="color" [(ngModel)]="case.color" required autofocus
+                            [ngClass]="{'ng-invalid ng-dirty' : submitted && !case.color}" />
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && !case.color">Spec is required.</small>
+
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row " style="display: flex; flex-direction: row;">
+                    <div class="field mx-5" style="display: block;width:100%;">
+
+                        <label for="model">Logo</label>
+                        <input multiple class="mb-5" type="file" pInputText id="file" (change)="onUpload($event)"
+                            required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !file }" />
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && !file">Logo is required.</small>
+
+                    </div>
+
+                </div>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                    (click)="hideDialog()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+                    (click)="saveProduct()"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-dialog [(visible)]="deleteCaseDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="panelCase">Are you sure you want to delete <b>{{panelCase.name}}</b>?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"
+                    (click)="deleteCaseDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes"
+                    (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-dialog [(visible)]="deleteCasesDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                <span>Are you sure you want to delete selected products?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"
+                    (click)="deleteCasesDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes"
+                    (click)="confirmDeleteSelected()"></button>
+            </ng-template>
+        </p-dialog>
+    </div>
+</div>
