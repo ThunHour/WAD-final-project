@@ -129,13 +129,27 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf  # Mount Nginx configuration
       - ./certbot_data:/etc/letsencrypt     # Mount Certbot data
     depends_on:
-      - eureka-server
       - admin-web
       - user-web
-      - partner-service
-      - admin_service
-      - main-service
       - api-get-way
+    networks:
+      - wad-network
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot_data:/etc/letsencrypt     # Mount Certbot data
+      - ./nginx.conf:/etc/nginx/nginx.conf  # Mount Nginx configuration
+    command: certonly --webroot --webroot-path=/var/www/certbot \
+            -d api.customize.kunapheap.com \
+            -d eureka.kunapheap.com \
+            -d customize.kunapheap.com \
+            -d admin.customize.kunapheap.com \
+            --agree-tos -n --email vghour@email.com
+    depends_on:
+      - nginx
+    networks:
+      - wad-network
   
 networks:
   wad-network:
