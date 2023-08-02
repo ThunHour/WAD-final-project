@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomizedService } from 'src/app/services/customized.service';
-
+import {Meta, Title} from '@angular/platform-browser';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -9,7 +9,22 @@ import { CustomizedService } from 'src/app/services/customized.service';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor(private _router: Router, private _customizedService: CustomizedService) { }
+  constructor(private meta:Meta,private _router: Router, private _customizedService: CustomizedService) {
+    this.meta.addTags([
+      {
+        name: 'title',
+        content: 'Home Page'
+      },
+      {
+        name: 'description',
+        content: 'Home Page'
+      },
+      {
+        name: 'keywords',
+        content: 'customized Page , customzed kunapheap, kunapheap store,customze kunapheap'
+      }
+    ])
+   }
   items: any[] = [
 
   ]
