@@ -120,7 +120,6 @@ services:
     depends_on:
       - partner-db
       - eureka-server
-
 networks:
   wad-network:
     driver: bridge
