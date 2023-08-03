@@ -159,5 +159,5 @@ networks:
   wad-network:
     driver: bridge
   nginx-proxy:
-    name: proxy_nginx-proxy
     external: true
+    name: host
