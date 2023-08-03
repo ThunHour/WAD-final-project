@@ -10,6 +10,8 @@ services:
     depends_on:
       - main-service
       - partner-service
+    networks:
+      - nginx-proxy
   user-web:
     build:
       context: ./frontend
@@ -19,6 +21,8 @@ services:
     depends_on:
       - main-service
       - partner-service
+    networks:
+      - nginx-proxy
   eureka-server:
     build:
       context: ./load balancer/eureka
@@ -36,6 +40,7 @@ services:
     restart: always
     networks:
       - wad-network
+      - nginx-proxy
   api-get-way:
     build:
       context: ./load balancer/spring-boot-zuulgatwayproxy
@@ -59,6 +64,7 @@ services:
       - eureka-server
     networks:
       - wad-network
+      - nginx-proxy
   main-db:
     image: postgres:14.3-alpine
     networks:
@@ -127,28 +133,31 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - /nginx.conf:/etc/nginx/nginx.conf
-      - /etc/letsencrypt:/etc/letsencrypt
-      - /var/lib/letsencrypt:/var/lib/letsencrypt     # Mount Certbot data
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./etc/letsencrypt:/etc/letsencrypt
+      - ./var/lib/letsencrypt:/var/lib/letsencrypt     # Mount Certbot data
     depends_on:
       - admin-web
       - user-web
       - api-get-way
     networks:
       - wad-network
+      - nginx-proxy
   certbot:
     image: certbot/certbot:latest
     container_name: devqa_certbot
     command: certonly -v --keep --email vghour@gmail.com@testmail.com --agree-tos --no-eff-email --duplicate --expand --webroot -w=/etc/letsencrypt --cert-name mydomain -d api.customize.kunapheap.com,eureka.kunapheap.com,customize.kunapheap.com,admin.customize.kunapheap.com
     volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
-      - /var/lib/letsencrypt:/var/lib/letsencrypt
+      - ./etc/letsencrypt:/etc/letsencrypt
+      - ./var/lib/letsencrypt:/var/lib/letsencrypt
 
     depends_on:
       - nginx
-    networks:
-      - wad-network
+
   
 networks:
   wad-network:
     driver: bridge
+  nginx-proxy:
+        external:
+            name: proxy_nginx-proxy
