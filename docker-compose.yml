@@ -10,8 +10,6 @@ services:
     depends_on:
       - main-service
       - partner-service
-    networks:
-      - nginx-proxy
   user-web:
     build:
       context: ./frontend
@@ -21,8 +19,6 @@ services:
     depends_on:
       - main-service
       - partner-service
-    networks:
-      - nginx-proxy
   eureka-server:
     build:
       context: ./load balancer/eureka
