@@ -157,6 +157,6 @@ export class AuthPageComponent implements OnInit {
     }
   }
   google() {
-    window.location.href = `http://localhost:8080/main/google`
+    window.location.href = `https://api.customize.kunapheap.com/main/google`
   }
 }

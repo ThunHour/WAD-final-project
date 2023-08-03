@@ -54,7 +54,7 @@ export default (app: Application) => {
     "/google/callback",
     passport.authenticate("google", { failureRedirect: "/failed" }),
     function (req:any, res: any) {
-      res.redirect("http://localhost:4200" + '?token=' + req.user.accessToken+"&refreshToken="+req.user.refreshToken);
+      res.redirect("https://customize.kunapheap.com" + '?token=' + req.user.accessToken+"&refreshToken="+req.user.refreshToken);
     }
   );
 
@@ -70,7 +70,7 @@ export default (app: Application) => {
   );
 
   route.get("/success", (req, res: any) => {
-    res.redirect("http://localhost:4200");
+    res.redirect("https://customize.kunapheap.com");
   });
   route.get("/failed", (req, res) => {
     res.json("failed");

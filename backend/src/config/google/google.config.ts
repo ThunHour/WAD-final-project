@@ -10,7 +10,7 @@ passport.use(
       clientID:
         "840765250179-vdislfv0skqurjvd6omteuhfa6bjc7pb.apps.googleusercontent.com",
       clientSecret: "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",
-      callbackURL: "http://localhost:3030/google/callback",
+      callbackURL: "https://api.customize.kunapheap.com/main/google/callback",
     },
     async function (
       accessToken: any,

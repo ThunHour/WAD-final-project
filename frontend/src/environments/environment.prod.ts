@@ -1,5 +1,5 @@
 export const environment = {
-  base: "http://13.213.56.201:8080",
+  base: "https://api.customize.kunapheap.com",
   production: true,
   mainService: `/main`,
   partnerService: '/partner',
