@@ -39,7 +39,7 @@ export default (app: Application) => {
   route.use("/ram", authMiddleware, ram());
   route.use("/motherBoard", authMiddleware, motherBoard());
   route.use("/cpu", authMiddleware, cpu());
-  // authorizeUser("ADMIN")
+  
   route.use("/storage", authMiddleware, storage());
   route.use("/gpu", authMiddleware, gpu());
   route.use("/powerSupply", authMiddleware, powerSupply());
@@ -54,7 +54,7 @@ export default (app: Application) => {
     "/google/callback",
     passport.authenticate("google", { failureRedirect: "/failed" }),
     function (req:any, res: any) {
-      res.redirect("https://customize.kunapheap.com" + '?token=' + req.user.accessToken+"&refreshToken="+req.user.refreshToken);
+      res.redirect("https://cipherzernia.tech" + '?token=' + req.user.accessToken+"&refreshToken="+req.user.refreshToken);
     }
   );
 

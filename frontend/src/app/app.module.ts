@@ -11,7 +11,7 @@ import { authHeader } from './services/auth-header.service';
 import { AuthServiceFromServer } from './services/auth.service';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthPageComponent } from './auth-page/auth-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -48,7 +48,9 @@ import { CommunityComponent } from './pages/community/community.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ToastrModule } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
-
+import {
+  APP_INITIALIZER
+} from "@angular/core";
 import { provideToastr } from 'ngx-toastr';
 
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
@@ -57,6 +59,7 @@ import { EditCustomizeComponent } from './pages/edit-customize/edit-customize.co
 import { GlobalErrorService } from './services/global-error.service';
 import { PartnerComponent } from './components/partner/partner.component';
 import { PartnerService } from './services/partner.service';
+import * as Sentry from '@sentry/angular-ivy';
 
 const appRoutes: Routes = [
   { path: '', component: AuthPageComponent },
@@ -142,7 +145,23 @@ const appRoutes: Routes = [
         onError: (err) => { console.error(err); }
       } as SocialAuthServiceConfig,
     },
-    { provide: ErrorHandler, useClass: GlobalErrorService },
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler({
+        showDialog: false,
+      }),
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router],
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => () => {},
+      deps: [Sentry.TraceService],
+      multi: true,
+    },
+    // { provide: ErrorHandler, useClass: GlobalErrorService },
 
   ],
   bootstrap: [AppComponent],

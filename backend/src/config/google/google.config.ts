@@ -10,7 +10,7 @@ passport.use(
       clientID:
         "840765250179-vdislfv0skqurjvd6omteuhfa6bjc7pb.apps.googleusercontent.com",
       clientSecret: "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",
-      callbackURL: "https://api.customize.kunapheap.com/main/google/callback",
+      callbackURL: "https://api.cipherzernia.tech/main/google/callback",
     },
     async function (
       accessToken: any,
@@ -18,16 +18,6 @@ passport.use(
       profile: any,
       done: any
     ) {
-      // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      //   return cb(err, user);
-      // });
-      const newUser = {
-        googleId: profile.id,
-        displayName: profile.displayName,
-        firstName: profile.name.givenName,
-        lastName: profile.name.familyName,
-        image: profile.photos[0].value,
-      };
       try {
 
         const user = await prisma.user.findUnique({
@@ -41,9 +31,11 @@ passport.use(
               refreshToken: "",
 
             });
+          } else {
+            const token = await jwt.jwtGenerator(user);
+            done(null, token);
           }
-          const token = await jwt.jwtGenerator(user);
-          done(null, token);
+
         } else {
           const addUser = await prisma.user.create({
             data: {

@@ -42,6 +42,7 @@ export class AuthPageComponent implements OnInit {
     private socialAuthService: SocialAuthService
   ) { }
   ngOnInit(): void {
+    throw new Error('Method not implemented.');
     this.initForm();
     this.initForm1();
     // if (localStorage.getItem('token')) {
@@ -129,7 +130,7 @@ export class AuthPageComponent implements OnInit {
     this.container.nativeElement.classList.add('right-panel-active');
   }
   facebook() {
-    return this._authService.facebook();
+    throw new Error("Sentry Test Error");
   }
   signInWithGoogle(): void {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then

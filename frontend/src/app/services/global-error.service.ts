@@ -13,5 +13,6 @@ export class GlobalErrorService implements ErrorHandler {
     if (error.status == 401) {
       this.authService.signOut();
     }
+    throw error;
   }
 }

@@ -1,11 +1,13 @@
 import { Router } from "express";
 import powerSupplyController from "./powerSupply.controller";
+import { authorizeUser } from '../../middleware/authorize';
 const uploadFile = require("multer")();
 export default () => {
   const router = Router();
   router.post(
     "/create",
     uploadFile.array("file"),
+    authorizeUser("ADMIN"),
     powerSupplyController.createPowerSupply
   );
   router.get("/getAllPowerSupply", powerSupplyController.getAllPowerSupply);
@@ -13,19 +15,19 @@ export default () => {
     "/getPowerSupplyById/:id",
     powerSupplyController.getPowerSupplyById
   );
-  router.delete("/delete/:id/:itemId", powerSupplyController.deletePowerSupply);
+  router.delete("/delete/:id/:itemId", authorizeUser("ADMIN"), powerSupplyController.deletePowerSupply);
   router.put(
-    "/update/:id",
+    "/update/:id", authorizeUser("ADMIN"),
     uploadFile.array("file"),
     powerSupplyController.updatePowerSupply
   );
   router.post(
-    "/createWithExistPanel/:id",
+    "/createWithExistPanel/:id", authorizeUser("ADMIN"),
     uploadFile.array("file"),
     powerSupplyController.createPowerSupplyWithExistPanel
   );
   router.delete(
-    "/deletePanel/:id",
+    "/deletePanel/:id", authorizeUser("ADMIN"),
     powerSupplyController.deletePanelPowerSupply
   );
   return router;
