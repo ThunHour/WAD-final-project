@@ -1,6 +1,6 @@
 export const environment = {
-  // base: "https://api.cipherzernia.tech",
-  base: "http://localhost:1111",
+  base: "https://api.cipherzernia.tech",
+
   production: true,
   mainService: `/main`,
   partnerService: '/partner',

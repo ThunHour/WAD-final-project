@@ -48,9 +48,6 @@ import { CommunityComponent } from './pages/community/community.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ToastrModule } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import {
-  APP_INITIALIZER
-} from "@angular/core";
 import { provideToastr } from 'ngx-toastr';
 
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
@@ -60,6 +57,7 @@ import { GlobalErrorService } from './services/global-error.service';
 import { PartnerComponent } from './components/partner/partner.component';
 import { PartnerService } from './services/partner.service';
 import * as Sentry from '@sentry/angular-ivy';
+import { SentryService } from './services/sentry.service';
 
 const appRoutes: Routes = [
   { path: '', component: AuthPageComponent },
@@ -145,23 +143,24 @@ const appRoutes: Routes = [
         onError: (err) => { console.error(err); }
       } as SocialAuthServiceConfig,
     },
-    {
-      provide: ErrorHandler,
-      useValue: Sentry.createErrorHandler({
-        showDialog: false,
-      }),
-    },
-    {
-      provide: Sentry.TraceService,
-      deps: [Router],
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: () => () => {},
-      deps: [Sentry.TraceService],
-      multi: true,
-    },
+    // {
+    //   provide: ErrorHandler,
+    //   useValue: Sentry.createErrorHandler({
+    //     showDialog: false,
+    //   }),
+    // },
+    // {
+    //   provide: Sentry.TraceService,
+    //   deps: [Router],
+    // },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: () => () => {},
+    //   deps: [Sentry.TraceService],
+    //   multi: true,
+    // },
     // { provide: ErrorHandler, useClass: GlobalErrorService },
+    { provide: ErrorHandler, useClass: SentryService },
 
   ],
   bootstrap: [AppComponent],

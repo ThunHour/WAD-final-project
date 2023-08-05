@@ -2,7 +2,6 @@ import {
   Component,
   OnInit,
   ElementRef,
-  VERSION,
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -10,8 +9,6 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  MaxValidator,
-  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { AuthServiceFromServer } from '../services/auth.service';
@@ -41,19 +38,12 @@ export class AuthPageComponent implements OnInit {
     private _authService: AuthServiceFromServer,
     private socialAuthService: SocialAuthService
   ) { }
+  backendGoogleLoginUrl = ""
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
     this.initForm();
     this.initForm1();
-    // if (localStorage.getItem('token')) {
-    //   this._router.navigate(['/homepage']);
-    // }
-    // this.socialAuthService.authState.subscribe((user) => {
-    //   this.user = user;
-    //   this.loggedIn = (user != null);
-    //   console.log(this.user)
-    // });
     this.handleRedirectedRoute();
+    this.backendGoogleLoginUrl = `${environment.base}${environment.mainService}/google`
   }
   initForm() {
     this.formGroup = new FormGroup({
@@ -158,6 +148,6 @@ export class AuthPageComponent implements OnInit {
     }
   }
   google() {
-    window.location.href = `https://api.customize.kunapheap.com/main/google`
+    window.location.href =  this.backendGoogleLoginUrl
   }
 }

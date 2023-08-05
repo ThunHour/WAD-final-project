@@ -7,6 +7,14 @@
       <input type="password" placeholder="Password" formControlName="password" autocomplete="new-password" />
       <input type="number" placeholder="Phone Number" formControlName="phonenumber" />
       <button (click)="signUp()">Sign Up</button>
+      <div class="d-flex flex-row">
+        <p>Sign Up Account with</p>
+
+        <a href="{{backendGoogleLoginUrl}}" class="social ms-3" (click)="google()"
+          routerLinkActive="{{backendGoogleLoginUrl}}">
+          <img src="../../../assets/icons/google.svg" alt="?">
+        </a>
+      </div>
     </form>
   </div>
   <div class="form-container sign-in-container">
@@ -24,16 +32,16 @@
         <!-- <a href="#" class="social ms-3" (click)="facebook()">
           <img src="../../../assets/icons/facebook.svg" alt="?">
         </a> -->
-        <a href="https://api.customize.kunapheap.com/main/google" class="social ms-3" (click)="google()"
-          routerLinkActive="https://api.customize.kunapheap.com/main/google">
+        <a href="{{backendGoogleLoginUrl}}" class="social ms-3" (click)="google()"
+          routerLinkActive="{{backendGoogleLoginUrl}}">
           <img src="../../../assets/icons/google.svg" alt="?">
         </a>
         <!-- <asl-google-signin-button type='icon' size='medium'></asl-google-signin-button> -->
         <!-- <button type="button" (click)="signInWithGoogle()" class="btn btn-danger">Login with Google</button> -->
 
       </div>
-      <p>Don’t have an account? <strong class=""> <a href="#">Sign up now</a></strong></p>
-      <a href="#">Forgot your password?</a>
+      <!-- <p>Don’t have an account? <strong class=""> <a href="#">Sign up now</a></strong></p>
+      <a href="#">Forgot your password?</a> -->
     </form>
   </div>
   <div class="overlay-container">
