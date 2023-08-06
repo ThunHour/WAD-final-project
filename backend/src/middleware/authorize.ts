@@ -1,18 +1,17 @@
 import { Response, NextFunction } from "express";
 const jwt = require("jsonwebtoken");
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient, Role, User } from "@prisma/client";
 import config from "../config/config";
 
 const prisma = new PrismaClient();
 
 export const authorizeUser = (role: string) => {
   return async (req: any, res: Response, next: NextFunction) => {
-    const token = req.header["authorization"].split(" ")[1];
-    const getUser = jwt.verify(token, config.ACCESS_TOKEN_SECRET);
+    const getUserid = req.user.id;
     const userById = (await prisma.user.findUnique({
-      where: { id: getUser.id },
+      where: { id: getUserid },
     })) as User;
-    if (userById.role !== role) {
+    if (userById.role !== Role.ADMIN) {
       return res.status(403).send({ message: "Forbidden" });
     }
     next();

@@ -27,8 +27,6 @@ function verifyRefreshToken(refreshToken: string) {
         const password = user.password;
         const id = user.id;
         const userInfo = { email: email, password: password, id: id };
-        console.log(userInfo);
-
         resolve(userInfo);
       }
     );

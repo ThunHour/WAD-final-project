@@ -6,7 +6,8 @@ export default () => {
   const router = Router();
   router.post(
     "/create",
-    uploadFile.single("file"), authorizeUser("ADMIN"),
+    authorizeUser("ADMIN"),
+    uploadFile.single("file"), 
     brandController.createBrand
   );
   router.get("/getAllBrand", brandController.getAllBrand);

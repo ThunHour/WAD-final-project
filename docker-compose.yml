@@ -115,7 +115,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - "4040:4001" # Use quotes for the port mapping
+      - "4040:4040" # Use quotes for the port mapping
     command: python app.py
     networks:
       - wad-network
