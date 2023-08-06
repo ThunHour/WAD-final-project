@@ -15,3 +15,7 @@ echo "start all service"
 docker compose up -d
 
 echo "Completed deploying" 
+
+echo "Restart server"
+
+systemctl restart nginx

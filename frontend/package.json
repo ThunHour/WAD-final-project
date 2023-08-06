@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org kit-q7 --project wad-ssh-cloud artifact && sentry-cli sourcemaps upload --org kit-q7 --project wad-ssh-cloud artifact",
+    "ng build": "ng build  && pnpm run sentry:sourcemaps"
   },
   "private": true,
   "dependencies": {
@@ -27,6 +29,7 @@
     "@sentry/angular": "^7.61.1",
     "@sentry/angular-ivy": "^7.61.1",
     "@sentry/tracing": "^7.61.1",
+    "@sentry/wizard": "^3.9.1",
     "bootstrap": "^5.2.3",
     "bs-stepper": "^1.7.0",
     "font-awesome": "^4.7.0",
