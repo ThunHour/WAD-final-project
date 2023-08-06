@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  myapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - zuul_routes_partner_url
+      - zuul_routes_main_url
+      - server_port = 8080
+      - spring_application_name=zuul-server
+      - eureka_instance_preferIpAddress=true
+      - eureka_client_registerWithEureka=true
+      - eureka_client_fetchRegistry=true
+      - eureka_client_serviceUrl_defaultZone=http://localhost:8761/eureka/
+    ports:
+      - '8080:8080'

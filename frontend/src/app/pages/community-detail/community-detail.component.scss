@@ -1,0 +1,85 @@
+.title h1 {
+  height: 95px;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 95px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -1.78px;
+  color: #FE8222;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin-bottom: 50px;
+}
+
+.title-sub h1 {
+  height: 95px;
+  font-weight: 500;
+  font-size: 45px;
+  line-height: 95px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -1.78px;
+  color: #FE8222;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin-bottom: 50px;
+}
+
+#customize-btn {
+  border-radius: 10px;
+  display: block;
+  color: #212529;
+  background: linear-gradient(to right, #fe8122cd 50%, #fe8222 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all .3s ease-out;
+  font-weight: 400;
+
+  &:hover {
+    background-position: left bottom;
+  }
+}
+
+// .btn-delete {
+//   font-size: 14px;
+//   color: #212529;
+//   background: linear-gradient(to right, #ef4444a7 50%, #ef4444e4 50%);
+// }
+
+// .btn-edit {
+//   font-size: 15px;
+//   color: #212529;
+//   background: linear-gradient(to right, #fe8122cd 50%, #fe8222 50%);
+// }
+
+// .btn-share {
+//   font-size: 15px;
+//   color: #212529;
+//   background: linear-gradient(to right, #fe8122cd 50%, #fe8222 50%);
+// }
+#community-card-text {
+  color: #FE8222;
+}
+
+#community-card-text-data {
+  color: black
+}
+.container{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.component-title {
+  font-weight: 700;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -1.78px;
+  color: rgba(0, 0, 0, 0.714);
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,17 @@
+<div class="container new-product mt-3">
+  <div class="d-flex justify-content-between">
+    <h2 class="fw-bold">Power Supply</h2>
+  </div>
+  <div class="row g-2 mt-3">
+    <div class="col-lg-3 col-md-6 col-12" *ngFor="let p of listPowerSupply">
+      <div class="card" (click)="goToDetail(p.id)">
+        <img [src]="p.powerSupply[0].color.image[0].imageUrl" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h6 class="card-title">Power Supply Name : {{p.powerSupply[0].model}}</h6>
+          <h6 style="color:grey">Spec: {{p.powerSupply[0].spec}}</h6>
+          <h6 style="color:#FF4C29">{{p.powerSupply[0].price}} $</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

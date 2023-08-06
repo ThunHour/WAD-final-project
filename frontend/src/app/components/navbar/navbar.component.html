@@ -1,0 +1,40 @@
+<nav class="navbar navbar-dark navbar-expand-md bg-dark justify-content-center">
+  <div class="container">
+    <a href="/" class="navbar-brand d-flex w-50 mr-auto">
+      <img style="width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      padding: 5px;
+      background-color: #FE8222;
+
+      " src="assets/icon.png" width="50" height="50" alt="">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse w-100" id="navbarNavDropdown">
+      <ul class="navbar-nav w-100 justify-content-center" routerLinkActive="active">
+        <li class="nav-item active">
+          <a class="nav-link" href="#" routerLink="homepage">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#" routerLink="component">Components</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLink="customize">Customize</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLink="history">History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLink="community">Community</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

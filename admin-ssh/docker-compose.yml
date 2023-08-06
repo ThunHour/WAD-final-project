@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - '8088:80'
+      - '443:443'
+    volumes:
+      - ./dist/ssh_team:/var/www/html
+      - ./nginx.conf:/etc/nginx/sites-available/default.conf/:ro

@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  partner-db:
+    image: postgres:14.3-alpine
+    container_name: partner-db
+    restart: always
+    command: -p 5433
+    ports:
+      - "5433:5433" # Correct the port mapping, it should be "5432" for PostgreSQL
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_USER: partner
+      POSTGRES_DB: partner-db
+    volumes:
+      - ./backup/backup.sql:/docker-entrypoint-initdb.d/backup.sql # Mount the 'data' folder to /docker-entrypoint-initdb.d inside the container
+      - ./script/restore.sh:/docker-entrypoint-initdb.d/restore.sh  # Mount the restore script to the initdb.d folder
+    networks:
+      - wad-network
+
+
+  partner-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "4040:4001" # Use quotes for the port mapping
+    command: python app.py
+    networks:
+      - wad-network
+    depends_on:
+      - partner-db
+networks:
+  wad-network:
+    driver: bridge

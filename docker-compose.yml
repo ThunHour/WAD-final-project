@@ -1,0 +1,130 @@
+version: "3.9"
+name: wadfinal
+services:
+  admin-web:
+    build:
+      context: ./admin-ssh
+      dockerfile: Dockerfile
+    ports:
+      - "9000:80"
+    depends_on:
+      - main-service
+      - partner-service
+  user-web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 8000:80
+    depends_on:
+      - main-service
+      - partner-service
+  eureka-server:
+    build:
+      context: ./load balancer/eureka
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "server.port" : 8761 ,
+        "eureka.instance.hostname" : "localhost",
+        "eureka.environment" : "prod"
+        }'
+    stdin_open: true
+    tty: true
+    restart: always
+    networks:
+      - wad-network
+    
+  api-get-way:
+    build:
+      context: ./load balancer/spring-boot-zuulgatwayproxy
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "zuul.routes.partner.url" : "http://partner-service:4040",
+        "zuul.routes.main.url" : "http://main-service:3030",
+        "server.port" : 8888,
+        "spring.application.name" : "zuul-server",
+        "eureka.instance.preferIpAddress" : true,
+        "eureka.client.registerWithEureka" : true,
+        "eureka.client.fetchRegistry" : true,
+        "eureka.client.serviceUrl.defaultZone" :  "http://eureka-server:8761/eureka/" }'
+    ports:
+      - "1111:8888"
+    depends_on:
+      - main-service
+      - partner-service
+      - eureka-server
+    networks:
+      - wad-network
+    
+  main-db:
+    image: postgres:14.3-alpine
+    networks:
+      - wad-network
+    container_name: main-db
+    restart: unless-stopped
+    volumes:
+      - ./backend/backup/backup.sql:/docker-entrypoint-initdb.d/backup.sql # Mount the 'data' folder to /docker-entrypoint-initdb.d inside the container
+      - ./backend/script/restore.sh:/docker-entrypoint-initdb.d/restore.sh
+    environment:
+      POSTGRES_USER: main
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: main-db
+    command: -p 5434
+    ports:
+      - "5434:5434"
+  main-service:
+    networks:
+      - wad-network
+    stdin_open: true
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: main-service
+    environment:
+      - EUREKA_BASE = "http://eureka-server:8761"
+    depends_on:
+      - main-db
+      - eureka-server
+    ports:
+      - "3030:3030"
+  partner-db:
+    image: postgres:14.3-alpine
+    container_name: partner-db
+    restart: always
+    command: -p 5433
+    ports:
+      - "5433:5433" # Correct the port mapping, it should be "5432" for PostgreSQL
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_USER: partner
+      POSTGRES_DB: partner-db
+    volumes:
+      - ./partner/backup/backup.sql:/docker-entrypoint-initdb.d/backup.sql # Mount the 'data' folder to /docker-entrypoint-initdb.d inside the container
+      - ./partner/script/restore.sh:/docker-entrypoint-initdb.d/restore.sh # Mount the restore script to the initdb.d folder
+    networks:
+      - wad-network
+  partner-service:
+    build:
+      context: ./partner
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "4040:4040" # Use quotes for the port mapping
+    command: python app.py
+    networks:
+      - wad-network
+    depends_on:
+      - partner-db
+      - eureka-server
+
+  
+networks:
+  wad-network:
+    driver: bridge
+

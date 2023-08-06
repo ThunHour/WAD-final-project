@@ -1,0 +1,258 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL_PRISMA")
+}
+
+model User {
+  id              String      @id @default(uuid())
+  email           String      @unique
+  name            String      
+  password        String?
+  google_password String?
+  role            Role        @default(USER)
+  phoneNumber     String?
+  customize       Customize[]
+}
+
+model Brand {
+  id        String     @id @default(uuid())
+  brandName String     @unique
+  category  Category[]
+  Image     Image?
+}
+
+model Category {
+  id               String             @id @default(uuid()) @map("category_id")
+  categoryName     String             @unique
+  brand            Brand              @relation(fields: [brandId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  brandId          String
+  Image            Image?
+  panelGpu         PanelGpu[]
+  panelcpu         PanelCpu[]
+  PanelCase        PanelCase[]
+  panelMotherBoard PanelMotherBoard[]
+  panelRam         PanelRam[]
+  panelStorage     PanelStorage[]
+  panelPowerSupply PanelPowerSupply[]
+}
+
+model PanelGpu {
+  id         String    @id @default(uuid())
+  name       String    @unique
+  gpu        Gpu[]
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
+
+  @@unique([id, name])
+}
+
+model Gpu {
+  id         String      @id @default(uuid())
+  model      String
+  spec       String
+  price      Float
+  color      Color?
+  customize  Customize[]
+  panelGpu   PanelGpu?   @relation(fields: [paneGpulId, model], references: [id, name], onDelete: Cascade, onUpdate: Cascade)
+  paneGpulId String?
+}
+
+model PanelCpu {
+  id               String             @id @default(uuid())
+  name             String             @unique
+  cpu              Cpu[]
+  panelmotherBoard PanelMotherBoard[]
+  category         Category?          @relation(fields: [categoryId], references: [id])
+  categoryId       String?
+
+  @@unique([id, name])
+}
+
+model Cpu {
+  id         String      @id @default(uuid())
+  model      String
+  spec       String
+  price      Float
+  type       String
+  color      Color?
+  customize  Customize[]
+  panelCpu   PanelCpu?   @relation(fields: [panelCpuId, model], references: [id, name], onDelete: Cascade, onUpdate: Cascade)
+  panelCpuId String?
+}
+
+model PanelPowerSupply {
+  id          String        @id @default(uuid())
+  name        String        @unique
+  powerSupply PowerSupply[]
+  category    Category?     @relation(fields: [categoryId], references: [id])
+  categoryId  String?
+
+  @@unique([id, name])
+}
+
+model PowerSupply {
+  id                 String            @id @default(uuid())
+  model              String
+  spec               String
+  price              Float
+  color              Color?
+  customize          Customize[]
+  panelPowerSupply   PanelPowerSupply? @relation(fields: [PanelPowerSupplyId, model], references: [id, name], onDelete: Cascade, onUpdate: Cascade)
+  PanelPowerSupplyId String?
+}
+
+model PanelStorage {
+  id               String             @id @default(uuid())
+  name             String             @unique
+  storage          Storage[]
+  panelmotherBoard PanelMotherBoard[]
+  category         Category?          @relation(fields: [categoryId], references: [id])
+  categoryId       String?
+
+  @@unique([id, name])
+}
+
+model Storage {
+  id             String        @id @default(uuid())
+  model          String
+  color          Color?
+  spec           String
+  price          Float
+  customize      Customize[]
+  panelStorage   PanelStorage? @relation(fields: [panelStorageId, model], references: [id, name], onDelete: Cascade, onUpdate: Cascade)
+  panelStorageId String?
+}
+
+model PanelRam {
+  id               String             @id @default(uuid())
+  name             String             @unique
+  ram              Ram[]
+  panelmotherBoard PanelMotherBoard[]
+  category         Category?          @relation(fields: [categoryId], references: [id])
+  categoryId       String?
+
+  @@unique([id, name])
+}
+
+model Ram {
+  id         String      @id @default(uuid())
+  model      String
+  spec       String
+  price      Float
+  color      Color?
+  type       String
+  customize  Customize[]
+  panelRam   PanelRam?   @relation(fields: [panelRamId, model], references: [id, name], onDelete: Cascade, onUpdate: Cascade)
+  panelRamId String?
+}
+
+model PanelCase {
+  id               String             @id @default(uuid())
+  name             String
+  case             Case[]
+  panelmotherBoard PanelMotherBoard[]
+  category         Category?          @relation(fields: [categoryId], references: [id])
+  categoryId       String?
+
+  @@unique([id, name])
+}
+
+model Case {
+  id          String      @id @default(uuid())
+  model       String
+  color       Color?
+  price       Float
+  customize   Customize[]
+  panelCase   PanelCase?  @relation(fields: [panelCaseId, model], references: [id, name], onDelete: Cascade, onUpdate: Cascade)
+  panelCaseId String?
+}
+
+model PanelMotherBoard {
+  id           String         @id @unique @default(uuid())
+  name         String
+  motherBoard  MotherBoard[]
+  panelcpu     PanelCpu[]
+  panelRam     PanelRam[]
+  panelstorage PanelStorage[]
+  panelcase    PanelCase[]
+  category     Category?      @relation(fields: [categoryId], references: [id])
+  categoryId   String?
+
+  @@unique([id, name])
+}
+
+model MotherBoard {
+  id                 String            @id @unique @default(uuid())
+  model              String
+  price              Float
+  color              Color?
+  customize          Customize[]
+  panelMotherBoard   PanelMotherBoard? @relation(fields: [panelMotherBoardId, model], references: [id, name], onDelete: Cascade, onUpdate: Cascade)
+  panelMotherBoardId String?
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Color {
+  id            String       @id @default(uuid())
+  color         String
+  image         Image[]
+  Gpu           Gpu?         @relation(fields: [gpuId], references: [id])
+  gpuId         String?      @unique
+  PowerSupply   PowerSupply? @relation(fields: [powerSupplyId], references: [id])
+  powerSupplyId String?      @unique
+  Cpu           Cpu?         @relation(fields: [cpuId], references: [id])
+  cpuId         String?      @unique
+  Ram           Ram?         @relation(fields: [ramId], references: [id])
+  ramId         String?      @unique
+  Storage       Storage?     @relation(fields: [storageId], references: [id])
+  storageId     String?      @unique
+  Case          Case?        @relation(fields: [caseId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  caseId        String?      @unique
+  MotherBoard   MotherBoard? @relation(fields: [motherBoardId], references: [id])
+  motherBoardId String?      @unique
+}
+
+model Image {
+  id          String    @id @default(uuid())
+  imageUrl    String
+  color       Color?    @relation(fields: [colorId], references: [id])
+  brand       Brand?    @relation(fields: [brandId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  category    Category? @relation(fields: [categooryId], references: [id])
+  categooryId String?   @unique
+  colorId     String?
+  brandId     String?   @unique
+}
+
+model Customize {
+  id            String       @id @default(uuid())
+  gpu           Gpu?         @relation(fields: [gpuId], references: [id])
+  powerSupply   PowerSupply? @relation(fields: [powerSupplyId], references: [id])
+  cpu           Cpu?         @relation(fields: [cpuId], references: [id])
+  ram           Ram?         @relation(fields: [ramId], references: [id])
+  storage       Storage?     @relation(fields: [storageId], references: [id])
+  case          Case?        @relation(fields: [caseId], references: [id])
+  motherBoard   MotherBoard? @relation(fields: [motherBoardId], references: [id])
+  user          User?        @relation(fields: [userId], references: [id])
+  motherBoardId String
+  share         Boolean      @default(false)
+  gpuId         String
+  powerSupplyId String
+  cpuId         String
+  ramId         String
+  storageId     String
+  caseId        String
+  userId        String
+
+  @@unique([gpuId, powerSupplyId, cpuId, ramId, storageId, caseId, motherBoardId, userId, share], name: "customize_unique")
+}

@@ -1,0 +1,62 @@
+<div class="container h-100 d-flex align-items-center justify-content-center" #container>
+  <div class="form-container sign-up-container">
+    <form action="#" [formGroup]="formGroup1">
+      <h1>Register Account</h1>
+      <input type="email" placeholder="Email" formControlName="email" />
+      <input type="text" placeholder="Name" formControlName="name" />
+      <input type="password" placeholder="Password" formControlName="password" autocomplete="new-password" />
+      <input type="number" placeholder="Phone Number" formControlName="phonenumber" />
+      <button (click)="signUp()">Sign Up</button>
+      <div class="d-flex flex-row">
+        <p>Sign Up Account with</p>
+
+        <a href="{{backendGoogleLoginUrl}}" class="social ms-3" (click)="google()"
+          routerLinkActive="{{backendGoogleLoginUrl}}">
+          <img src="../../../assets/icons/google.svg" alt="?">
+        </a>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAAIXgH9nqr5TIoCX"></div>
+      </div>
+    </form>
+  </div>
+  <div class="form-container sign-in-container">
+    <!-- <form action="#" (ngSubmit)="signIn()"> -->
+    <form action="#" [formGroup]="formGroup">
+      <h1 class="mb-5">Login Existing Account</h1>
+      <input type="email" formControlName="email" placeholder="Email" />
+      <input type="password" formControlName="password" placeholder="Password" />
+
+
+      <button type="button" (click)="signIn()">Sign In</button>
+
+      <div class="d-flex flex-row">
+        <p>Login Account with</p>
+        <!-- <a href="#" class="social ms-3" (click)="facebook()">
+          <img src="../../../assets/icons/facebook.svg" alt="?">
+        </a> -->
+        <a href="{{backendGoogleLoginUrl}}" class="social ms-3" (click)="google()"
+          routerLinkActive="{{backendGoogleLoginUrl}}">
+          <img src="../../../assets/icons/google.svg" alt="?">
+        </a>
+        <!-- <asl-google-signin-button type='icon' size='medium'></asl-google-signin-button> -->
+        <!-- <button type="button" (click)="signInWithGoogle()" class="btn btn-danger">Login with Google</button> -->
+
+      </div>
+      <!-- <p>Don’t have an account? <strong class=""> <a href="#">Sign up now</a></strong></p>
+      <a href="#">Forgot your password?</a> -->
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1 class="main-text">Welcome Back!</h1>
+        <p>To keep connected please login to your account with your personal information</p>
+        <button class="ghost" (click)="signIn()">Sign In</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1 class="main-text">Welcome Customize Kunapheap!</h1>
+        <p>To keep connected please login to your account with your personal information</p>
+        <button class="ghost" (click)="signUp()">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>

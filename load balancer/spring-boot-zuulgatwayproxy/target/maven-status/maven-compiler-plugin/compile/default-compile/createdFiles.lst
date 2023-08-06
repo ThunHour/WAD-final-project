@@ -1,0 +1,7 @@
+com\example\springbootzuulgatwayproxy\filters\PostFilter.class
+com\example\springbootzuulgatwayproxy\filters\RouteFilter.class
+com\example\springbootzuulgatwayproxy\SpringBootZuulgatwayproxyApplication.class
+com\example\springbootzuulgatwayproxy\filters\PreFilter.class
+com\example\springbootzuulgatwayproxy\filters\DeleteFilter.class
+com\example\springbootzuulgatwayproxy\filters\ErrorFilter.class
+com\example\springbootzuulgatwayproxy\filters\PutFilter.class

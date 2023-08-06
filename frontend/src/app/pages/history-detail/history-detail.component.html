@@ -1,0 +1,262 @@
+<div *ngIf="isLoading==true; else main">
+  <app-loading></app-loading>
+</div>
+<ng-template #main>
+  <section id="main">
+    <div class="title mt-1">
+      <h1 class="ps-5">History Detail</h1>
+    </div>
+  </section>
+  <div class="container">
+
+    <div id="Community-card" class="row">
+      <div class="col-5">
+
+        <div class="col-6">
+          <div class="row justify-content-center ">
+            <div class="col-6 ">
+              <div style="height: 300px;width: 300px; display: flex;">
+                <img style="object-fit: contain;" class="card-img-top" src={{item.case.color.image[0].imageUrl}}
+                  alt="Card image cap">
+              </div>
+            </div>
+
+          </div>
+          <p style="width: 130px;" id="community-card-text">Price : <span
+              id="community-card-text-data">{{getTotal(item)}}$</span>
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="col-5">
+        <p>
+          <span style="font-size: 20px;">Customized By&nbsp;</span>
+          <span style="font-weight: bold;color: #FFA500; font-size: 25px; ">{{checkUserName(item.user.name)}}</span>
+        </p>
+        <p id="community-card-text">MotherBoard : <span id="community-card-text-data">{{item.motherBoard.model}}</span>
+        </p>
+        <p id="community-card-text">Case : <span id="community-card-text-data">
+            {{item.case.model}}
+          </span></p>
+        <p id="community-card-text">RAM : <span id="community-card-text-data">
+            {{item.ram.model}}
+          </span></p>
+        <p id="community-card-text">GPU : <span id="community-card-text-data">
+            {{item.gpu.model}}
+          </span></p>
+        <p id="community-card-text">Power Supply : <span id="community-card-text-data">
+            {{item.powerSupply.model}}
+          </span></p>
+        <p id="community-card-text">Storage : <span id="community-card-text-data">
+            {{item.storage.model}}
+          </span></p>
+        <p id="community-card-text">Cpu : <span id="community-card-text-data">
+            {{item.cpu.model}}
+          </span></p>
+        <div class="row">
+          <div class="col-4">
+
+            <button id="customize-btn" type="button" class="btn btn-light btn-edit" (click)="goToEditCustomize(item.id)">Edit Customized</button>
+
+          </div>
+          <div class="col-4">
+
+            <button id="customize-btn" type="button" class="btn btn-light btn-share">Share Customized</button>
+
+          </div>
+          <div class="col-4">
+            <button id="customize-btn" type="button" class="btn btn-light btn-delete"
+              (click)="deleteCustom(item.id)">Delete Customized</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="title-sub mt-1">
+    <h1 class="ps-5">Component Detail</h1>
+  </div>
+  <div class="container">
+    <div id="Community-card" class="row">
+      <div class="col-6 align-self-start"
+        style="display: flex;flex-direction: column; justify-content: center; align-items: center">
+        <div style="height: 300px;width: 300px; display: flex">
+          <img style="object-fit: contain;" class="card-img-top" src={{item.motherBoard.color.image[0].imageUrl}}
+            alt="Card image cap">
+        </div>
+      </div>
+      <div class="col-6 align-self-start">
+        <h1 class="component-title">
+          Motherboard
+        </h1>
+        <p id="community-card-text">Model : <span id="community-card-text-data">{{item.motherBoard.model}}</span>
+        </p>
+        <p id="community-card-text">Color : <span id="community-card-text-data">
+            {{item.motherBoard.color.color}}
+          </span></p>
+        <p id="community-card-text">Price : <span id="community-card-text-data">
+            {{item.motherBoard.price}}$
+          </span></p>
+      </div>
+    </div>
+  </div>
+  <div class="container ">
+    <div id="Community-card" class="row justify-content-center">
+      <div class="col-6 " style="display: flex;flex-direction: row-reverse">
+
+        <div class="col-11" style="display: flex;flex-direction: column;justify-content: start ;align-items: center">
+          <div>
+            <h1 class="component-title">
+              Case
+            </h1>
+            <p id="community-card-text">Model : <span id="community-card-text-data">{{item.case.model}}</span></p>
+            <p id="community-card-text">Color : <span id="community-card-text-data">{{item.case.color.color}}</span></p>
+            <p id="community-card-text">Price : <span id="community-card-text-data">{{item.case.price}}$</span></p>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-6 align-self-start" style="display: flex;flex-direction: column; justify-content: center;">
+        <div style="height: 300px;width: 300px; display: flex">
+          <img style="object-fit: contain;" class="card-img-top" src={{item.case.color.image[0].imageUrl}}
+            alt="Card image cap">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container ">
+    <div id="Community-card" class="row">
+      <div class="col-6 align-self-start"
+        style="display: flex;flex-direction: column; justify-content: center; align-items: center">
+        <div style="height: 300px;width: 300px; display: flex">
+          <img style="object-fit: contain;" class="card-img-top" src={{item.gpu.color.image[0].imageUrl}}
+            alt="Card image cap">
+        </div>
+      </div>
+      <div class="col-6 align-self-start">
+        <h1 class="component-title">
+          Gpu
+        </h1>
+        <p id="community-card-text">Model : <span id="community-card-text-data">{{item.gpu.model}}</span>
+        </p>
+        <p id="community-card-text">Spec : <span id="community-card-text-data">{{item.gpu.spec}}</span></p>
+        <p id="community-card-text">Color : <span id="community-card-text-data">
+            {{item.gpu.color.color}}
+          </span></p>
+        <p id="community-card-text">Price : <span id="community-card-text-data">
+            {{item.gpu.price}}$
+          </span></p>
+      </div>
+    </div>
+  </div>
+  <div class="container ">
+    <div id="Community-card" class="row justify-content-center">
+      <div class="col-6 " style="display: flex;flex-direction: row-reverse">
+
+        <div class="col-11" style="display: flex;flex-direction: column;justify-content: start ;align-items: center">
+          <div>
+            <h1 class="component-title">
+              Power Supply
+            </h1>
+            <p id="community-card-text">Model : <span id="community-card-text-data">{{item.powerSupply.model}}</span>
+            </p>
+            <p id="community-card-text">Spec : <span id="community-card-text-data">{{item.powerSupply.spec}}</span></p>
+            <p id="community-card-text">Color : <span
+                id="community-card-text-data">{{item.powerSupply.color.color}}</span></p>
+            <p id="community-card-text">Price : <span id="community-card-text-data">{{item.powerSupply.price}}$</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 align-self-start" style="display: flex;flex-direction: column; justify-content: center;">
+        <div style="height: 300px;width: 300px; display: flex">
+          <img style="object-fit: contain;" class="card-img-top" src={{item.powerSupply.color.image[0].imageUrl}}
+            alt="Card image cap">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container ">
+    <div id="Community-card" class="row">
+      <div class="col-6 align-self-start"
+        style="display: flex;flex-direction: column; justify-content: center; align-items: center">
+        <div style="height: 300px;width: 300px; display: flex">
+          <img style="object-fit: contain;" class="card-img-top" src={{item.storage.color.image[0].imageUrl}}
+            alt="Card image cap">
+        </div>
+      </div>
+      <div class="col-6 align-self-start">
+        <h1 class="component-title">
+          Storage
+        </h1>
+        <p id="community-card-text">Model : <span id="community-card-text-data">{{item.storage.model}}</span>
+        </p>
+        <p id="community-card-text">Spec : <span id="community-card-text-data">{{item.storage.spec}}</span></p>
+        <p id="community-card-text">Color : <span id="community-card-text-data">
+            {{item.storage.color.color}}
+          </span></p>
+        <p id="community-card-text">Price : <span id="community-card-text-data">
+            {{item.storage.price}}$
+          </span></p>
+      </div>
+    </div>
+  </div>
+  <div class="container ">
+    <div id="Community-card" class="row justify-content-center">
+      <div class="col-6 " style="display: flex;flex-direction: row-reverse">
+
+        <div class="col-11" style="display: flex;flex-direction: column;justify-content: start ;align-items: center">
+          <div>
+            <h1 class="component-title">
+              Ram
+            </h1>
+            <p id="community-card-text">Model : <span id="community-card-text-data">{{item.ram.model}}</span></p>
+            <p id="community-card-text">Type : <span id="community-card-text-data">{{item.ram.type}}</span></p>
+            <p id="community-card-text">Spec : <span id="community-card-text-data">{{item.ram.spec}}</span></p>
+            <p id="community-card-text">Color : <span id="community-card-text-data">{{item.ram.color.color}}</span></p>
+            <p id="community-card-text">Price : <span id="community-card-text-data">{{item.ram.price}}$</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 align-self-start" style="display: flex;flex-direction: column; justify-content: center;">
+        <div style="height: 300px;width: 300px; display: flex">
+          <img style="object-fit: contain;" class="card-img-top" src={{item.ram.color.image[0].imageUrl}}
+            alt="Card image cap">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container ">
+    <div id="Community-card" class="row">
+      <div class="col-6 align-self-start"
+        style="display: flex;flex-direction: column; justify-content: center; align-items: center">
+        <div style="height: 300px;width: 300px; display: flex">
+          <img style="object-fit: contain;" class="card-img-top" src={{item.cpu.color.image[0].imageUrl}}
+            alt="Card image cap">
+        </div>
+      </div>
+      <div class="col-6 align-self-start">
+        <h1 class="component-title">
+          Cpu
+        </h1>
+        <p id="community-card-text">Model : <span id="community-card-text-data">{{item.cpu.model}}</span>
+        </p>
+        <p id="community-card-text">Type : <span id="community-card-text-data">{{item.cpu.type}}</span>
+        </p>
+        <p id="community-card-text">Spec : <span id="community-card-text-data">{{item.cpu.spec}}</span></p>
+        <p id="community-card-text">Color : <span id="community-card-text-data">
+            {{item.cpu.color.color}}
+          </span></p>
+        <p id="community-card-text">Price : <span id="community-card-text-data">
+            {{item.cpu.price}}$
+          </span></p>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</ng-template>

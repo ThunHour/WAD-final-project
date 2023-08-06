@@ -1,0 +1,343 @@
+<div>
+  <div *ngIf="type=='case'">
+    <div id="test-l-1" class="content pt-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-8" style="margin-right: 20px;margin-bottom: 1px; ">
+
+                <img src={{item.case[0].color.image[0].imageUrl}} class="img-fluid animated" alt=""
+                  style="object-fit: contain;" width="100%" height="100%">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div id="dialog-window" class="">
+              <h1 style="color:#FE8222; font-size: 50px;">Case Detail </h1>
+              <div class="mt-4">
+                <p><strong>Model :</strong> {{item.case[0].model}}</p>
+                <p><strong>Color :</strong> {{item.case[0].color.color}}</p>
+                <p><strong>Price :</strong> {{item.case[0].price}}$</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h1 class="mb-4 mt-5" style="color: #FE8222;">Related Components</h1>
+        <div class="row" style="margin-bottom: 50px;">
+          <div class="col-lg-12 ">
+            <owl-carousel-o [options]="customOptions">
+              <ng-template carouselSlide *ngFor="let p of listRelatedItem">
+                <div class="card m-1" (click)="goToDetail(p.id)">
+                  <img [src]="p.case[0].color.image[0].imageUrl" class="card-img-top "
+                    style="object-fit: contain;width: 250px; " alt="...">
+                  <div class="card-body">
+                    <h6 class="card-title" style=" text-overflow: ellipsis; white-space: nowrap;overflow: hidden">Case :
+                      {{p.case[0].model}}</h6>
+                    <h6 style="color:#FF4C29">Price : {{p.case[0].price}} $</h6>
+                  </div>
+                </div>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="type=='ram'">
+    <!-- ram -->
+    <div id="test-l-1" class="content pt-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-8" style="margin-right: 20px;margin-bottom: 1px; ">
+
+                <img src={{item.ram[0].color.image[0].imageUrl}} class="img-fluid animated" alt=""
+                  style="object-fit: contain;" width="100%" height="100%">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div id="dialog-window" class="">
+              <h1 style="color:#FE8222; font-size: 50px;">Ram Detail </h1>
+              <div class="mt-4">
+                <p><strong>Model :</strong> {{item.ram[0].model}}</p>
+                <p><strong>Type :</strong> {{item.ram[0].type}}</p>
+                <p><strong>Spec :</strong> {{item.ram[0].spec}}</p>
+                <p><strong>Color :</strong> {{item.ram[0].color.color}}</p>
+                <p><strong>Price :</strong> {{item.ram[0].price}}$</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h1 class="mb-4 mt-5" style="color: #FE8222;">Related Components</h1>
+        <div class="row" style="margin-bottom: 50px;">
+          <div class="col-12">
+            <owl-carousel-o [options]="customOptions">
+              <ng-template carouselSlide *ngFor="let p of listRelatedItem">
+                <div class="card m-1" (click)="goToDetail(p.id)">
+                  <img [src]="p.ram[0].color.image[0].imageUrl" class="card-img-top "
+                    style="object-fit: contain;width: 250px; " alt="...">
+                  <div class="card-body">
+                    <h6 class="card-title" style=" text-overflow: ellipsis; white-space: nowrap;overflow: hidden">Ram :
+                      {{p.ram[0].model}}</h6>
+                    <h6 style="color:#FF4C29">Price : {{p.ram[0].price}} $</h6>
+                  </div>
+                </div>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="type=='motherBoard'">
+    <div id="test-l-1" class="content pt-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-8" style="margin-right: 20px;margin-bottom: 1px; ">
+
+                <img src={{item.motherBoard[0].color.image[0].imageUrl}} class="img-fluid animated" alt=""
+                  style="object-fit: contain;" width="100%" height="100%">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div id="dialog-window" class="">
+              <h1 style="color:#FE8222; font-size: 50px;">MotherBoard Detail </h1>
+              <div class="mt-4">
+                <p><strong>Model :</strong> {{item.motherBoard[0].model}}</p>
+                <p><strong>Color :</strong> {{item.motherBoard[0].color.color}}</p>
+                <p><strong>Price :</strong> {{item.motherBoard[0].price}}$</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h1 class="mb-4 mt-5" style="color: #FE8222;">Related Components</h1>
+        <div class="row" style="margin-bottom: 50px;">
+          <div class="col-lg-12">
+            <owl-carousel-o [options]="customOptions">
+              <ng-template carouselSlide *ngFor="let p of listRelatedItem">
+
+                <div class="card m-1" (click)="goToDetail(p.id)">
+                  <img [src]="p.motherBoard[0].color.image[0].imageUrl" class="card-img-top "
+                    style="object-fit: contain;width: 250px; " alt="...">
+                  <div class="card-body">
+                    <h6 class="card-title" style=" text-overflow: ellipsis; white-space: nowrap;overflow: hidden">Case :
+                      {{p.motherBoard[0].model}}</h6>
+                    <h6 style="color:#FF4C29">Price : {{p.motherBoard[0].price}} $</h6>
+                  </div>
+                </div>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="type=='gpu'">
+    <div id="test-l-1" class="content pt-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-8" style="margin-right: 20px;margin-bottom: 1px; ">
+
+                <img src={{item.gpu[0].color.image[0].imageUrl}} class="img-fluid animated" alt=""
+                  style="object-fit: contain;" width="100%" height="100%">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div id="dialog-window" class="">
+              <h1 style="color:#FE8222; font-size: 50px;">Gpu Detail </h1>
+              <div class="mt-4">
+                <p><strong>Model :</strong> {{item.gpu[0].model}}</p>
+                <p><strong>Spec :</strong> {{item.gpu[0].spec}}$</p>
+                <p><strong>Color :</strong> {{item.gpu[0].color.color}}</p>
+                <p><strong>Price :</strong> {{item.gpu[0].price}}$</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h1 class="mb-4 mt-5" style="color: #FE8222;">Related Components</h1>
+        <div class="row" style="margin-bottom: 50px;">
+          <div class="col-lg-12 ">
+            <owl-carousel-o [options]="customOptions">
+              <ng-template carouselSlide *ngFor="let p of listRelatedItem">
+                <div class="card m-1" (click)="goToDetail(p.id)">
+                  <img [src]="p.gpu[0].color.image[0].imageUrl" class="card-img-top "
+                    style="object-fit: contain;width: 250px; " alt="...">
+                  <div class="card-body">
+                    <h6 class="card-title" style=" text-overflow: ellipsis; white-space: nowrap;overflow: hidden">Gpu :
+                      {{p.gpu[0].model}}</h6>
+                    <h6 style="color:#FF4C29">Price : {{p.gpu[0].price}} $</h6>
+                  </div>
+                </div>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="type=='cpu'">
+    <div id="test-l-1" class="content pt-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-8" style="margin-right: 20px;margin-bottom: 1px; ">
+
+                <img src={{item.cpu[0].color.image[0].imageUrl}} class="img-fluid animated" alt=""
+                  style="object-fit: contain;" width="100%" height="100%">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div id="dialog-window" class="">
+              <h1 style="color:#FE8222; font-size: 50px;">Cpu Detail </h1>
+              <div class="mt-4">
+                <p><strong>Model :</strong> {{item.cpu[0].model}}</p>
+                <p><strong>Type :</strong> {{item.cpu[0].type}}$</p>
+                <p><strong>Spec :</strong> {{item.cpu[0].spec}}$</p>
+                <p><strong>Color :</strong> {{item.cpu[0].color.color}}</p>
+                <p><strong>Price :</strong> {{item.cpu[0].price}}$</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h1 class="mb-4 mt-5" style="color: #FE8222;">Related Components</h1>
+        <div class="row" style="margin-bottom: 50px;">
+          <div class="col-lg-12 ">
+            <owl-carousel-o [options]="customOptions">
+              <ng-template carouselSlide *ngFor="let p of listRelatedItem">
+                <div class="card m-1" (click)="goToDetail(p.id)">
+                  <img [src]="p.cpu[0].color.image[0].imageUrl" class="card-img-top "
+                    style="object-fit: contain;width: 250px; " alt="...">
+                  <div class="card-body">
+                    <h6 class="card-title" style=" text-overflow: ellipsis; white-space: nowrap;overflow: hidden">Cpu :
+                      {{p.cpu[0].model}}</h6>
+                    <h6 style="color:#FF4C29">Price : {{p.cpu[0].price}} $</h6>
+                  </div>
+                </div>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <div *ngIf="type=='powerSupply'">
+    <div id="test-l-1" class="content pt-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-8" style="margin-right: 20px;margin-bottom: 1px; ">
+
+                <img src={{item.powerSupply[0].color.image[0].imageUrl}} class="img-fluid animated" alt=""
+                  style="object-fit: contain;" width="100%" height="100%">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div id="dialog-window" class="">
+              <h1 style="color:#FE8222; font-size: 50px;">PowerSupply Detail </h1>
+              <div class="mt-4">
+
+                <p><strong>Model :</strong> {{item.powerSupply[0].model}}</p>
+                <p><strong>Spec :</strong> {{item.powerSupply[0].spec}}</p>
+                <p><strong>Color :</strong> {{item.powerSupply[0].color.color}}</p>
+                <p><strong>Price :</strong> {{item.powerSupply[0].price}}$</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h1 class="mb-2 mt-5" style="color: #FE8222;">Related Components</h1>
+        <div class="row">
+          <div class="col-lg-12 ">
+            <owl-carousel-o [options]="customOptions">
+              <ng-template carouselSlide *ngFor="let p of listRelatedItem">
+                <div class="card m-1" (click)="goToDetail(p.id)">
+                  <img [src]="p.powerSupply[0].color.image[0].imageUrl" class="card-img-top "
+                    style="object-fit: contain;width: 250px; " alt="...">
+                  <div class="card-body">
+                    <h6 class="card-title" style=" text-overflow: ellipsis; white-space: nowrap;overflow: hidden">
+                      PowerSupply :
+                      {{p.powerSupply[0].model}}</h6>
+                    <h6 style="color:#FF4C29">Price : {{p.powerSupply[0].price}} $</h6>
+                  </div>
+                </div>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="type=='storage'">
+    <div id="test-l-1" class="content pt-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-8" style="margin-right: 20px;margin-bottom: 1px; ">
+
+                <img src={{item.storage[0].color.image[0].imageUrl}} class="img-fluid animated" alt=""
+                  style="object-fit: contain;" width="100%" height="100%">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div id="dialog-window" class="">
+              <h1 style="color:#FE8222; font-size: 50px;">Storage Detail </h1>
+              <div class="mt-4">
+                <p><strong>Model :</strong> {{item.storage[0].model}}</p>
+                <p><strong>Spec :</strong> {{item.storage[0].spec}}</p>
+                <p><strong>Color :</strong> {{item.storage[0].color.color}}</p>
+                <p><strong>Price :</strong> {{item.storage[0].price}}$</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h1 class="mb-4 mt-5" style="color: #FE8222;">Related Components</h1>
+        <div class="row" style="margin-bottom: 50px;">
+          <div class="col-lg-12 ">
+            <owl-carousel-o [options]="customOptions">
+              <ng-template carouselSlide *ngFor="let p of listRelatedItem">
+                <div class="card m-1" (click)="goToDetail(p.id)">
+                  <img [src]="p.storage[0].color.image[0].imageUrl" class="card-img-top "
+                    style="object-fit: contain;width: 250px; " alt="...">
+                  <div class="card-body">
+                    <h6 class="card-title" style=" text-overflow: ellipsis; white-space: nowrap;overflow: hidden">
+                      Storage :
+                      {{p.storage[0].model}}</h6>
+                    <h6 style="color:#FF4C29">Price : {{p.storage[0].price}} $</h6>
+                  </div>
+                </div>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,52 @@
+.title h1 {
+  height: 95px;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 95px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -1.78px;
+  color: #FE8222;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+
+#customize-btn {
+  border-radius: 10px;
+  display: block;
+  color:#212529;
+  background: linear-gradient(to right, #fe8122cd 50%, #fe8222 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all .3s ease-out;
+  font-weight: 400;
+    &:hover {
+      background-position: left bottom;
+    }
+}
+
+
+
+.custom-toast-title {
+  color: white
+}
+
+#Community-card {
+  cursor: pointer;
+  padding: 30px;
+  border: #FFA500 2px solid;
+  border-radius: 20px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+#community-card-text{
+  color: #FE8222;
+}
+#community-card-text-data{
+  color:black
+}
+
