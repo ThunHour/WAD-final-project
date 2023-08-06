@@ -7,60 +7,73 @@
       <h1 class="ps-5">History</h1>
     </div>
   </section>
-  <div class="container">
-    <div id="customized-card" *ngFor="let p of listCustomized">
-      <div id="Community-card" class="row" (click)="goToCustomizeDetail(p.id)">
-        <div class="col-5">
+  <div *ngIf="listCustomized.length > 0 ; else noData">
+    <div class="container">
+      <div id="customized-card" *ngFor="let p of listCustomized">
+        <div id="Community-card" class="row" (click)="goToCustomizeDetail(p.id)">
           <div class="col-5">
-            <div class="row justify-content-center ">
-              <div class="col-5 ">
-                <div style="height: 300px;width: 300px; display: flex;">
-                  <img style="object-fit: contain;" class="card-img-top" src={{p.case.color.image[0].imageUrl}}
-                    alt="Card image cap">
-                </div>
-                <p style="width: 130px;" id="community-card-text">Price : <span
-                    id="community-card-text-data">{{getTotal(p)}}$</span>
+            <div class="col-5">
+              <div class="row justify-content-center ">
+                <div class="col-5 ">
+                  <div style="height: 300px;width: 300px; display: flex;">
+                    <img style="object-fit: contain;" class="card-img-top" src={{p.case.color.image[0].imageUrl}}
+                      alt="Card image cap">
+                  </div>
+                  <p style="width: 130px;" id="community-card-text">Price : <span
+                      id="community-card-text-data">{{getTotal(p)}}$</span>
 
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-5">
-          <p>
-            <span style="font-size: 20px;">Customized By&nbsp;</span>
-            <span style="font-weight: bold;color: #FFA500; font-size: 25px; ">{{checkUserName(p.user.name)}}</span>
-          </p>
-          <p id="community-card-text">MotherBoard : <span id="community-card-text-data">{{p.motherBoard.model}}</span>
-          </p>
-          <p id="community-card-text">Case : <span id="community-card-text-data">
-              {{p.case.model}}
-            </span></p>
-          <p id="community-card-text">RAM : <span id="community-card-text-data">
-              {{p.ram.model}}
-            </span></p>
-          <p id="community-card-text">GPU : <span id="community-card-text-data">
-              {{p.gpu.model}}
-            </span></p>
-          <p id="community-card-text">Power Supply : <span id="community-card-text-data">
-              {{p.powerSupply.model}}
-            </span></p>
-          <p id="community-card-text">Storage : <span id="community-card-text-data">
-              {{p.storage.model}}
-            </span></p>
-          <p id="community-card-text">Cpu : <span id="community-card-text-data">
-              {{p.cpu.model}}
-            </span></p>
+          <div class="col-5">
+            <p>
+              <span style="font-size: 20px;">Customized By&nbsp;</span>
+              <span style="font-weight: bold;color: #FFA500; font-size: 25px; ">{{checkUserName(p.user.name)}}</span>
+            </p>
+            <p id="community-card-text">MotherBoard : <span id="community-card-text-data">{{p.motherBoard.model}}</span>
+            </p>
+            <p id="community-card-text">Case : <span id="community-card-text-data">
+                {{p.case.model}}
+              </span></p>
+            <p id="community-card-text">RAM : <span id="community-card-text-data">
+                {{p.ram.model}}
+              </span></p>
+            <p id="community-card-text">GPU : <span id="community-card-text-data">
+                {{p.gpu.model}}
+              </span></p>
+            <p id="community-card-text">Power Supply : <span id="community-card-text-data">
+                {{p.powerSupply.model}}
+              </span></p>
+            <p id="community-card-text">Storage : <span id="community-card-text-data">
+                {{p.storage.model}}
+              </span></p>
+            <p id="community-card-text">Cpu : <span id="community-card-text-data">
+                {{p.cpu.model}}
+              </span></p>
 
-        </div>
-        <div class="col-2 align-self-end">
-          <div class="d-flex justify-content-end" (click)="share($event,p.id)">
-            <button id="customize-btn" type="button" class="btn btn-light">Share Customized</button>
+          </div>
+          <div class="col-2 align-self-end">
+            <div class="d-flex justify-content-end" (click)="share($event,p.id)">
+              <button id="customize-btn" type="button" class="btn btn-light">Share Customized</button>
+            </div>
           </div>
         </div>
+
       </div>
 
     </div>
-
   </div>
+  <ng-template #noData>
+
+
+
+    <div style="height: 17.7vh; display: flex; justify-content: center; align-items: center">
+      <p style="font-size: 28px; font-weight:400;">You have no history</p>
+    </div>
+
+
+  </ng-template>
+
   <app-footer></app-footer>
 </ng-template>

@@ -17,7 +17,27 @@ export class HistoryComponent {
 
   async ngOnInit() {
     this.isLoading = true;
-    (await this._customizedService.getHistoryCustomized()).subscribe(
+    ((await this._customizedService.getHistoryCustomized()).pipe(
+      catchError((error: any) => {
+        if (error.status == 404) {
+          this.toastr.warning("You have no customized", 'Warning',
+            {
+              timeOut: 1500,
+              closeButton: true,
+              enableHtml: true,
+              progressBar: true,
+              progressAnimation: 'decreasing',
+              positionClass: 'toast-' + 'top' + '-' + 'right',
+              titleClass: "text-light",
+              messageClass: "text-light",
+            })
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 100);
+        }
+        return error
+      })
+    )).subscribe(
       (data: any) => {
         this.listCustomized = data.data;
         setTimeout(() => {
@@ -69,7 +89,21 @@ export class HistoryComponent {
           setTimeout(() => {
             this.isLoading = false;
           }, 100);
+        } else {
+          this.toastr.error(error.error.message, 'Error',
+            {
+              timeOut: 1500,
+              closeButton: true,
+              enableHtml: true,
+              progressBar: true,
+              progressAnimation: 'decreasing',
+              positionClass: 'toast-' + 'top' + '-' + 'right',
+              titleClass: "text-light",
+              messageClass: "text-light",
+            })
         }
+
+
         return error
       })
     ).subscribe(
@@ -92,6 +126,9 @@ export class HistoryComponent {
 
       }
     )
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 100);
   }
   getTotal(data: any) {
     return this._customizedService.getTotalPrice(data);

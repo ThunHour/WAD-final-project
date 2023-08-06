@@ -11,7 +11,7 @@ import { authHeader } from './services/auth-header.service';
 import { AuthServiceFromServer } from './services/auth.service';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { Router, RouterModule, Routes } from '@angular/router';
+import {  RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthPageComponent } from './auth-page/auth-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -36,12 +36,7 @@ import { ButtonModule } from 'primeng/button';
 import { HistoryComponent } from './pages/history/history.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateService } from './services/create.service';
-import {
-  SocialAuthServiceConfig,
-} from '@abacritt/angularx-social-login';
-import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { BrowserModule } from '@angular/platform-browser';
-import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { ItemDetailComponent } from './pages/item-detail/item-detail.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { CommunityComponent } from './pages/community/community.component';
@@ -53,10 +48,9 @@ import { provideToastr } from 'ngx-toastr';
 import { HistoryDetailComponent } from './pages/history-detail/history-detail.component';
 import { CommunityDetailComponent } from './pages/community-detail/community-detail.component';
 import { EditCustomizeComponent } from './pages/edit-customize/edit-customize.component';
-import { GlobalErrorService } from './services/global-error.service';
 import { PartnerComponent } from './components/partner/partner.component';
 import { PartnerService } from './services/partner.service';
-import * as Sentry from '@sentry/angular-ivy';
+
 import { SentryService } from './services/sentry.service';
 
 const appRoutes: Routes = [
@@ -111,7 +105,6 @@ const appRoutes: Routes = [
     ButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    GoogleSigninButtonModule,
     ToastrModule.forRoot(),
   ],
   providers: [
@@ -130,19 +123,7 @@ const appRoutes: Routes = [
     CustomizedService,
     PartnerService,
     CreateService,
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('663990587528-hmu2scpu3t5m3eablhkmb62uq57r1i8c.apps.googleusercontent.com')
-          }
-        ],
-        onError: (err) => { console.error(err); }
-      } as SocialAuthServiceConfig,
-    },
+
     // {
     //   provide: ErrorHandler,
     //   useValue: Sentry.createErrorHandler({

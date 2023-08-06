@@ -16,7 +16,6 @@ import { AuthServiceFromServer } from '../services/auth.service';
 import { SigninModel } from '../models/signIn.model';
 import { SignupModel } from '../models/signUp.model';
 
-import { SocialAuthService, GoogleLoginProvider, SocialUser } from '@abacritt/angularx-social-login';
 import { environment } from 'src/environments/environment.prod';
 @Component({
   selector: 'app-auth-page',
@@ -29,14 +28,13 @@ export class AuthPageComponent implements OnInit {
 
   formGroup: FormGroup;
   formGroup1: FormGroup;
-  user: SocialUser;
+
 
   loggedIn: boolean;
   constructor(
     private _router: Router,
     private _fb: FormBuilder,
-    private _authService: AuthServiceFromServer,
-    private socialAuthService: SocialAuthService
+    private _authService: AuthServiceFromServer
   ) { }
   backendGoogleLoginUrl = ""
   ngOnInit(): void {
@@ -118,21 +116,6 @@ export class AuthPageComponent implements OnInit {
 
     }
     this.container.nativeElement.classList.add('right-panel-active');
-  }
-  facebook() {
-    throw new Error("Sentry Test Error");
-  }
-  signInWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then
-      (user => {
-        this.user = user;
-        console.log(user);
-        console.log(this.user);
-
-      }).catch(
-        error =>
-          console.log(error)
-      );
   }
   handleRedirectedRoute() {
     const urlParams = new URLSearchParams(window.location.search);
