@@ -39,7 +39,7 @@ async function login(req: Request, res: Response, next: NextFunction) {
     }
     const user = await authService.loginService(req.body);
 
-    if (user) {
+    if (user != null && user.role == Role.USER) {
       const token = jwtGen.jwtGenerator(user);
       res.cookie("token", token.accessToken, {
         httpOnly: true,

@@ -16,6 +16,6 @@ export class LoginService {
             param: null,
 
         }
-        return this.http.post(`${environment.base+environment.mainService}auth/login`, { email: email, password: password }, httpOptions)
+        return this.http.post(`${environment.base+environment.mainService}auth/admin/login`, { email: email, password: password }, httpOptions)
     }
 }
