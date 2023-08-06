@@ -13,8 +13,7 @@ passport.use(
       callbackURL: "https://api.cipherzernia.tech/main/google/callback",
     },
     async function (
-      accessToken: any,
-      refreshToken: any,
+
       profile: any,
       done: any
     ) {
@@ -24,18 +23,27 @@ passport.use(
           where: { email: profile.emails[0].value },
         });
         if (user != null) {
-          const checkPassword = await comparePassword(profile.id, user?.google_password ?? "");
-          if (!checkPassword) {
-            done(null, {
-              accessToken: "",
-              refreshToken: "",
-
-            });
-          } else {
-            const token = await jwt.jwtGenerator(user);
+          if (user.google_password == null) {
+            await prisma.user.update({
+              where: { email: profile.emails[0].value },
+              data: {
+                google_password: profile.id,
+              },
+            }); const token = await jwt.jwtGenerator(user);
             done(null, token);
-          }
+          } else {
+            const checkPassword = await comparePassword(profile.id, user?.google_password!);
+            if (!checkPassword) {
+              const token = await jwt.jwtGenerator(user);
+              done(null, token);
 
+            } else {
+              done(null, {
+                accessToken: "",
+                refreshToken: "",
+              });
+            }
+          }
         } else {
           const addUser = await prisma.user.create({
             data: {
