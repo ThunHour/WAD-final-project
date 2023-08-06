@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org kit-q7 --project wad-ssh-cloud artifact && sentry-cli sourcemaps upload --org kit-q7 --project wad-ssh-cloud artifact",
-    "ng build": "ng build  && pnpm run sentry:sourcemaps"
+    "ng build": "ng build --configuration production  && pnpm run sentry:sourcemaps"
   },
   "private": true,
   "dependencies": {
