@@ -2,6 +2,7 @@ import { Response, NextFunction } from "express";
 const jwt = require("jsonwebtoken");
 import { PrismaClient, User } from "@prisma/client";
 import config from "../config/config";
+
 const prisma = new PrismaClient();
 
 export const authorizeUser = (role: string) => {

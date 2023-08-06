@@ -10,15 +10,15 @@ services:
     depends_on:
       - main-service
       - partner-service
-  user-web:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - 8000:80
-    depends_on:
-      - main-service
-      - partner-service
+  # user-web:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 8000:80
+  #   depends_on:
+  #     - main-service
+  #     - partner-service
   eureka-server:
     build:
       context: ./load balancer/eureka
