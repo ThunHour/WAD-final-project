@@ -74,6 +74,9 @@ dependencies:
   ngx-toastr:
     specifier: ^17.0.2
     version: 17.0.2(@angular/common@15.2.9)(@angular/core@15.2.9)(@angular/platform-browser@15.2.9)
+  ngx-turnstile:
+    specifier: ^0.0.7
+    version: 0.0.7(@angular/common@15.2.9)(@angular/core@15.2.9)
   primeicons:
     specifier: ^6.0.1
     version: 6.0.1
@@ -5323,6 +5326,17 @@ packages:
       '@angular/common': 15.2.9(@angular/core@15.2.9)(rxjs@7.8.0)
       '@angular/core': 15.2.9(rxjs@7.8.0)(zone.js@0.11.8)
       '@angular/platform-browser': 15.2.9(@angular/animations@15.2.9)(@angular/common@15.2.9)(@angular/core@15.2.9)
+      tslib: 2.5.0
+    dev: false
+
+  /ngx-turnstile@0.0.7(@angular/common@15.2.9)(@angular/core@15.2.9):
+    resolution: {integrity: sha512-lMXHayi8OrZcZDGI7QWG0CegzPlo0dHRiMMxBZarw6NmmB3zp22WCKBABinFfy0XrsjjsJNs0tUjvqmBURVHrw==}
+    peerDependencies:
+      '@angular/common': ^14.2.0
+      '@angular/core': ^14.2.0
+    dependencies:
+      '@angular/common': 15.2.9(@angular/core@15.2.9)(rxjs@7.8.0)
+      '@angular/core': 15.2.9(rxjs@7.8.0)(zone.js@0.11.8)
       tslib: 2.5.0
     dev: false
 

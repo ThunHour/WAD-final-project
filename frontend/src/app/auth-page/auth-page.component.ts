@@ -28,6 +28,7 @@ export class AuthPageComponent implements OnInit {
 
   formGroup: FormGroup;
   formGroup1: FormGroup;
+  siteKey: string = '';
 
 
   loggedIn: boolean;
@@ -36,8 +37,12 @@ export class AuthPageComponent implements OnInit {
     private _fb: FormBuilder,
     private _authService: AuthServiceFromServer
   ) { }
+  sendCaptchaResponse(captchaResponse: any) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
   backendGoogleLoginUrl = ""
   ngOnInit(): void {
+    this.siteKey = environment.siteKey
     this.initForm();
     this.initForm1();
     this.handleRedirectedRoute();
@@ -131,6 +136,6 @@ export class AuthPageComponent implements OnInit {
     }
   }
   google() {
-    window.location.href =  this.backendGoogleLoginUrl
+    window.location.href = this.backendGoogleLoginUrl
   }
 }

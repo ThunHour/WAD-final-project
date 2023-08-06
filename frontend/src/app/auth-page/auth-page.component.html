@@ -6,6 +6,8 @@
       <input type="text" placeholder="Name" formControlName="name" />
       <input type="password" placeholder="Password" formControlName="password" autocomplete="new-password" />
       <input type="number" placeholder="Phone Number" formControlName="phonenumber" />
+      <ngx-turnstile [siteKey]="siteKey" (resolved)="sendCaptchaResponse($event)" theme="auto"
+        [tabIndex]="0"></ngx-turnstile>
       <button (click)="signUp()">Sign Up</button>
       <div class="d-flex flex-row">
         <p>Sign Up Account with</p>
@@ -14,8 +16,11 @@
           routerLinkActive="{{backendGoogleLoginUrl}}">
           <img src="../../../assets/icons/google.svg" alt="?">
         </a>
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAAAIXgH9nqr5TIoCX"></div>
+              <ngx-turnstile [siteKey]="siteKey" (resolved)="sendCaptchaResponse($event)" theme="auto"
+        [tabIndex]="0"></ngx-turnstile>
+
       </div>
+
     </form>
   </div>
   <div class="form-container sign-in-container">
@@ -41,6 +46,8 @@
         <!-- <button type="button" (click)="signInWithGoogle()" class="btn btn-danger">Login with Google</button> -->
 
       </div>
+      <ngx-turnstile [siteKey]="siteKey" (resolved)="sendCaptchaResponse($event)" theme="auto"
+        [tabIndex]="0"></ngx-turnstile>
       <!-- <p>Don’t have an account? <strong class=""> <a href="#">Sign up now</a></strong></p>
       <a href="#">Forgot your password?</a> -->
     </form>

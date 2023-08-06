@@ -11,7 +11,7 @@ import { authHeader } from './services/auth-header.service';
 import { AuthServiceFromServer } from './services/auth.service';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import {  RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthPageComponent } from './auth-page/auth-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -50,7 +50,7 @@ import { CommunityDetailComponent } from './pages/community-detail/community-det
 import { EditCustomizeComponent } from './pages/edit-customize/edit-customize.component';
 import { PartnerComponent } from './components/partner/partner.component';
 import { PartnerService } from './services/partner.service';
-
+import { NgxTurnstileModule, NgxTurnstileFormsModule } from "ngx-turnstile";
 import { SentryService } from './services/sentry.service';
 
 const appRoutes: Routes = [
@@ -104,6 +104,7 @@ const appRoutes: Routes = [
     DialogModule,
     ButtonModule,
     FormsModule,
+    NgxTurnstileModule, NgxTurnstileFormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
   ],

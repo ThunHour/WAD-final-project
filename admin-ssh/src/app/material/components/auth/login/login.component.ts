@@ -6,6 +6,7 @@ import { Message, MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { LocalService } from 'src/app/material/service/local-storage.service';
 import { LoginService } from 'src/app/material/service/login.service';
+import { environment } from 'src/environments/environment.prod';
 
 
 @Component({
@@ -23,14 +24,18 @@ import { LoginService } from 'src/app/material/service/login.service';
     providers: [MessageService]
 })
 export class LoginComponent {
-
+    siteKey: string = '';
     valCheck: string[] = ['remember'];
     email: string = "";
     password: string = "";
     msgs: Message[] = [];
 
     constructor(private auth: LoginService, private service: MessageService, private local: LocalService, private _router: Router, public layoutService: LayoutService) { }
+    sendCaptchaResponse(captchaResponse: any) {
+        console.log(`Resolved captcha with response: ${captchaResponse}`);
+    }
     ngOnInit(): void {
+        this.siteKey = environment.siteKey
         if (this.local.getData("token").token !== "") {
             this._router.navigate(['pages/brand'])
             return

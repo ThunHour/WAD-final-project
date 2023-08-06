@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
+import { NgxTurnstileModule, NgxTurnstileFormsModule } from "ngx-turnstile";
 @NgModule({
     imports: [
         ToastModule,
@@ -17,7 +18,8 @@ import { ToastModule } from 'primeng/toast';
         CheckboxModule,
         InputTextModule,
         FormsModule,
-        PasswordModule
+        PasswordModule,
+        NgxTurnstileModule, NgxTurnstileFormsModule
     ],
     declarations: [LoginComponent]
 })

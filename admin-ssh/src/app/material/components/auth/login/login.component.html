@@ -28,7 +28,8 @@
                         <a class="font-medium no-underline ml-2 text-right cursor-pointer"
                             style="color: var(--primary-color)">Forgot password?</a>
                     </div>
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAAIXgH9nqr5TIoCX"></div>
+                    <ngx-turnstile [siteKey]="siteKey" (resolved)="sendCaptchaResponse($event)" theme="auto"
+                        [tabIndex]="0"></ngx-turnstile>
                     <button pButton pRipple label="Sign In" class="w-full p-3 text-xl" (click)="login()"></button>
 
                 </div>
