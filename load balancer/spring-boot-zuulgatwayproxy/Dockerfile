@@ -4,7 +4,8 @@
 # COPY . .
 # RUN mvn clean install
 
-# CMD mvn spring-boot:run
+# RUN mvn clean package
+
 
 FROM openjdk:8-jdk-alpine
 ADD ./target/spring-boot-zuulgatwayproxy-0.0.1-SNAPSHOT.jar app.jar
